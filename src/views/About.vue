@@ -1,7 +1,9 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <div class="box" />
+    <div class="box van-hairline--top">
+      323
+    </div>
     <van-button type="primary">
       主要按钮
     </van-button>
@@ -17,15 +19,14 @@ export default defineComponent({
     [Button.name]: Button
   },
   setup () {
-    console.log('object');
+    console.log('object 1');
+    console.log('object 2');
+    console.log('object 3');
+    console.log('object 4');
+    console.log('object 5');
+    console.log('object 6');
+    console.log('object 7');
+    console.log('object 8');
   }
 });
 </script>
-
-<style lang="scss" scoped>
-.box {
-  width: 375px;
-  height: 375px;
-  background-color: red;
-}
-</style>

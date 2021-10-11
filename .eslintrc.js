@@ -23,13 +23,13 @@ module.exports = {
     }],
     'vue/html-self-closing': ['error', // html标签自闭合还是双闭合
       {
-          html: {
-              void: 'always', // 常见的自闭合html标签，要自闭合，比如 img input hr br
-              normal: 'never', // 普通html标签，除了上面的 img input等外的普通html标签，要双闭合
-              component: 'never' // vue组件的，用双闭合
-          }
+        html: {
+          void: 'always', // 常见的自闭合html标签，要自闭合，比如 img input hr br
+          normal: 'never', // 普通html标签，除了上面的 img input等外的普通html标签，要双闭合
+          component: 'never' // vue组件的，用双闭合
+        }
       }
-  ],
+    ]
   },
   overrides: [
     {
