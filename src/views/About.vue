@@ -1,6 +1,7 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
+    <div class="box" />
     <van-button type="primary">
       主要按钮
     </van-button>
@@ -20,3 +21,11 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss" scoped>
+.box {
+  width: 375px;
+  height: 375px;
+  background-color: red;
+}
+</style>

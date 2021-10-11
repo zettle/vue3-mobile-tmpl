@@ -55,3 +55,20 @@ module.exports = {
   }
 };
 ```
+
+
+
+## 3、移动端适配大小
+1. 修改`public/index.html`的`meta`信息，改为下面，禁止用户放大缩小页面
+```html
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+```
+
+2. 使用`viewport`来适配屏幕宽度，rem布局已经可以淘汰，但对应的，想要控制大屏的时候，限制下所有元素的最大尺寸目前没有想到实现方式
+
+3. 安装[postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport/blob/master/README_CN.md): `npm i -D postcss-px-to-viewport`
+
+4. 修改`postcss.config.js`如下:
+```js
+
+```
