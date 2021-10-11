@@ -1,13 +1,15 @@
 {
-  "name": "vue3-mobile-unit",
+  "name": "vue3-mobile-tmpl",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "report": "vue-cli-service build --report",
     "test": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "commit": "cz"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -43,9 +45,11 @@
     "husky": "^7.0.0",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
+    "ts-import-plugin": "^1.6.7",
     "typescript": "~4.1.5",
     "vant": "^3.2.5",
-    "vue-jest": "^5.0.0-0"
+    "vue-jest": "^5.0.0-0",
+    "webpack-merge": "^5.8.0"
   },
   "config": {
     "commitizen": {
