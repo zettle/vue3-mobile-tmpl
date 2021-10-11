@@ -1,8 +1,8 @@
 import { App } from 'vue';
-import { Button, List, Tabbar, TabbarItem } from 'vant';
+import { Button, Tabbar, TabbarItem } from 'vant';
 
 const components = [
-  Button, List, Tabbar, TabbarItem
+  Button, Tabbar, TabbarItem
 ];
 
 export default function setupVant (app: App): void {

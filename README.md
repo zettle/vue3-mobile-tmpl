@@ -70,5 +70,15 @@ module.exports = {
 
 4. 修改`postcss.config.js`如下:
 ```js
-
+module.exports = {
+  plugins: {
+    'postcss-px-to-viewport': {
+      viewportWidth: 375
+    }
+  }
+};
 ```
+
+5. 把vant的也转下，不然有些大屏幕下看着vant的和自己的突兀挺大的
+
+6. 引入`npm i -S normalize.css`，抹平浏览器默认样式差异
