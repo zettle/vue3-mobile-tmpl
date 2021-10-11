@@ -1,0 +1,6 @@
+{
+  "watch": [
+    "./mockServer/**/*.js",
+    "./mockServer/**/*.json"
+  ]
+}

@@ -82,3 +82,23 @@ module.exports = {
 5. 把vant的也转下，不然有些大屏幕下看着vant的和自己的突兀挺大的
 
 6. 引入`npm i -S normalize.css`，抹平浏览器默认样式差异
+
+
+
+
+## 4、集成node server，mock数据
+使用koa2脚手架: `npm i -g koa-generator`
+
+执行`koa2 -e mockServer`
+
+安装nodemon: `npm i -D nodemon`
+
+修改`nodemon.json`，只监听`mockServer`文件夹里面内容的变化，内容如下:
+```json
+{
+  "watch": [
+    "./mockServer/**/*.js",
+    "./mockServer/**/*.json"
+  ]
+}
+```
