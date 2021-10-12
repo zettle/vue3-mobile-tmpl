@@ -1,5 +1,8 @@
 <template>
   <app-layout class="home">
+    <svg-icon
+      icon-class="camera">
+    </svg-icon>
     <img
       alt="Vue logo"
       src="../../assets/logo.png" />
@@ -9,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import axios from 'axios';
+// import axios from 'axios';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 
 export default defineComponent({
@@ -18,10 +21,10 @@ export default defineComponent({
     HelloWorld
   },
   setup () {
-    console.log(process.env.VUE_APP_ENV);
-    axios.get('/channel_api/bar').then(res => {
-      console.log(res.data);
-    });
+    // console.log(process.env.VUE_APP_ENV);
+    // axios.get('/channel_api/bar').then(res => {
+    //   console.log(res.data);
+    // });
   }
 });
 </script>

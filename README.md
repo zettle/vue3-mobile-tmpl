@@ -102,3 +102,60 @@ module.exports = {
   ]
 }
 ```
+
+
+## 5、svg管理
+传统的svg是通过字体图标管理，但是借助iconfont等网站，存在时间长了，难以维护的问题
+
+这里使用另外一种方案，借助`svg-sprite-loader`工具，把svg的都放到项目中维护
+
+安装: `npm i -D svg-sprite-loader`
+
+修改`vue.config.js`如下:
+```js
+chainWebpack (config) {
+  const svgIconPath = 'src/components/baseCom/svg-icon/icons';
+  config.module
+    .rule('svg') // 找个配置rule规则里面的svg
+    .exclude.add(resolve(svgIconPath)) // 项目除了制定文件夹有svg，可能其他地方有svg，这些其他地方svg应该有vue-cli原来的svg管理去管理
+    .end();
+  config.module
+    .rule('icons')// 配置rule规则里面新增的icons规则
+    .test(/\.svg$/)// icons规则里匹配到.svg结尾的文件
+    .include.add(resolve(svgIconPath)) // 包含src/icons下的.svg文件
+    .end()
+    .use('svg-sprite-loader')
+    .loader('svg-sprite-loader')
+    .options({ symbolId: 'icon-[name]' })// class名
+    .end();
+}
+```
+项目要用到的svg就复制到`/src/components/baseCom/svg-icon/icons/*`里面
+
+在`/src/components/baseCom/svg-icon.vue`，如果写上代码
+```ts
+const req = require.context('./icons', false, /\.svg$/);
+const requireAll = (requireContext: __WebpackModuleApi.RequireContext) => {
+  return requireContext.keys().map(requireContext);
+};
+requireAll(req);
+```
+会一直提示`__WebpackModuleApi undefined`
+
+但是在ts文件中，就不会出现这个提示，因此我们要不就把`svg-icon.vue`的实现和`require.context()`自动引入分开
+
+一个写在`.vue`文件中，一个写在`.ts`中
+
+另外一种方案是我们直接不要写`.vue`了，写`.tsx`，这里使用的就是这种方案
+
+
+
+
+
+## 其他
+### 1、ios无点击反馈
+这是因为 iOS Safari 默认不会触发 :active 伪类，解决方法是在 body 标签上添加一个空的 ontouchstart 属性：
+```html
+<body ontouchstart="">
+</body>
+```
