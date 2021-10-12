@@ -3,6 +3,10 @@
     <svg-icon
       icon-class="camera">
     </svg-icon>
+
+    <svg-icon
+      icon-class="rmb">
+    </svg-icon>
     <img
       alt="Vue logo"
       src="../../assets/logo.png" />
@@ -28,3 +32,14 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss">
+.svg-icon-camera {
+  color: yellowgreen;
+  font-size: 30px;
+}
+.svg-icon-rmb {
+  color: red;
+  font-size: 30px;
+}
+</style>

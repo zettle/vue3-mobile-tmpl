@@ -148,7 +148,21 @@ requireAll(req);
 
 另外一种方案是我们直接不要写`.vue`了，写`.tsx`，这里使用的就是这种方案
 
+在字体图标中，我们常常通过控制`color/fontSize`控制`颜色/大小`
 
+那么现在我们只需要加上下面样式
+```scss
+.svg-icon {
+  width: 1em; // 要设置成这个，就可以外层通过fontSize控制图标的大小
+  height: 1em;
+  overflow: hidden;
+  vertical-align: -0.15em;
+  fill: currentColor; // 要设置这个，就可以外层通过color控制图标的颜色了
+}
+```
+有时候，我们使用了一个svg，通过color控制颜色没有起效果，那么就去这个svg的代码看下，把所有`fill`属性都删除
+
+![](./readme/fill.png)
 
 
 

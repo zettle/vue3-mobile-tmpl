@@ -1,4 +1,5 @@
 import { defineComponent, computed } from 'vue';
+import './style.scss';
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/18446
 const req = require.context('./icons', false, /\.svg$/);
