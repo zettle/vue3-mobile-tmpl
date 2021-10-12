@@ -5,7 +5,9 @@
   "scripts": {
     "start": "vue-cli-service serve",
     "server": "nodemon mockServer/bin/www",
-    "build": "vue-cli-service build",
+    "build:sit": "vue-cli-service build --mode sit",
+    "build:uat": "vue-cli-service build --mode uat",
+    "build:prod": "vue-cli-service build --mode production",
     "report": "vue-cli-service build --report",
     "test": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",

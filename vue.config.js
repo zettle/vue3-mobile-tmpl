@@ -4,6 +4,14 @@ const tsImportPluginFactory = require('ts-import-plugin');
 /* eslint-enable */
 
 module.exports = {
+  devServer: {
+    proxy: {
+      '/channel_api': {
+        target: 'http://localhost:3000/api',
+        pathRewrite: { '^/channel_api': '' }
+      }
+    }
+  },
   chainWebpack (config) {
     // vant的按需加载
     config.module.rule('ts').use('ts-loader').tap(options => {
