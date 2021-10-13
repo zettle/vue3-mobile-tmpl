@@ -1,46 +1,37 @@
 <template>
-  <app-layout class="home">
-    <svg-icon
-      icon-class="camera">
-    </svg-icon>
-
-    <svg-icon
-      icon-class="rmb">
-    </svg-icon>
-    <img
-      alt="Vue logo"
-      src="../../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"></HelloWorld>
-  </app-layout>
+  <van-swipe
+    class="my-swipe"
+    :autoplay="3000"
+    lazy-render>
+    <van-swipe-item
+      v-for="image in images"
+      :key="image">
+      <img :src="image" />
+    </van-swipe-item>
+  </van-swipe>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-// import axios from 'axios';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-
+import { Swipe, SwipeItem } from 'vant';
 export default defineComponent({
-  name: 'Home',
   components: {
-    HelloWorld
+    [Swipe.name]: Swipe,
+    [SwipeItem.name]: SwipeItem
   },
   setup () {
-    // console.log(process.env.VUE_APP_ENV);
-    // axios.get('/channel_api/bar').then(res => {
-    //   console.log(res.data);
-    // });
+    const images = [
+      'https://img.yzcdn.cn/vant/apple-1.jpg',
+      'https://img.yzcdn.cn/vant/apple-2.jpg'
+    ];
+
+    return { images };
   }
 });
 </script>
-
-<style lang="scss">
-.svg-icon-camera {
-  color: $primary-color;
-  font-size: 30px;
-}
-.svg-icon-rmb {
-  color: red;
-  font-size: 30px;
-  @include rounded-corners;
+<style lang="scss" scoped>
+.my-swipe img {
+  width: 100%;
+  height: auto;
 }
 </style>

@@ -166,6 +166,28 @@ requireAll(req);
 
 
 
+
+## 6、全局引入scss变量、mixins
+安装: `npm i -D sass-resources-loader`
+
+修改`vue.config.js`，内容如下:
+```js
+const oneOfsMap = config.module.rule('scss').oneOfs.store;
+oneOfsMap.forEach(item => {
+  item
+    .use('sass-resources-loader')
+    .loader('sass-resources-loader')
+    .options({
+      resources: [
+        resolve('./src/assets/style/_variable.scss'),
+        resolve('./src/assets/style/_mixins.scss')
+      ]
+    })
+    .end();
+});
+```
+
+
 ## 其他
 ### 1、ios无点击反馈
 这是因为 iOS Safari 默认不会触发 :active 伪类，解决方法是在 body 标签上添加一个空的 ontouchstart 属性：
