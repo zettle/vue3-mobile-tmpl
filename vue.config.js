@@ -57,5 +57,22 @@ module.exports = {
       });
       return options;
     });
+
+    /********************
+     * scss全局变量引入，不必每个页面都引入
+     ********************/
+    const oneOfsMap = config.module.rule('scss').oneOfs.store;
+    oneOfsMap.forEach(item => {
+      item
+        .use('sass-resources-loader')
+        .loader('sass-resources-loader')
+        .options({
+          resources: [
+            resolve('./src/assets/style/_variable.scss'),
+            resolve('./src/assets/style/_mixins.scss')
+          ]
+        })
+        .end();
+    });
   }
 };

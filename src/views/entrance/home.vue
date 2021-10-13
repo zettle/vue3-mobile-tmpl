@@ -35,11 +35,12 @@ export default defineComponent({
 
 <style lang="scss">
 .svg-icon-camera {
-  color: yellowgreen;
+  color: $primary-color;
   font-size: 30px;
 }
 .svg-icon-rmb {
   color: red;
   font-size: 30px;
+  @include rounded-corners;
 }
 </style>
