@@ -42,9 +42,11 @@ export default defineComponent({
   color: $primary-color;
   font-size: 30px;
 }
+
 .svg-icon-rmb {
   color: red;
   font-size: 30px;
+
   @include rounded-corners;
 }
 </style>

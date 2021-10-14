@@ -8,6 +8,6 @@ import regGlobalComponent from './utils/regGlobalComponent';
 const app = createApp(App);
 app.use(store);
 app.use(router);
-app.use(regGlobalComponent); // vant全局组件，按需加载
+app.use(regGlobalComponent); // 注册vant和自定义的全局组件
 
 app.mount('#app');

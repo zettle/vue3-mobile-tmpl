@@ -2,6 +2,7 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
 const tsImportPluginFactory = require('ts-import-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 /* eslint-enable */
 
 function resolve (dir) {
@@ -74,5 +75,17 @@ module.exports = {
         })
         .end();
     });
+  },
+  configureWebpack (config) {
+    // 如果是本地环境，则启动stylelint检查css
+    if (process.env.NODE_ENV === 'development') {
+      config.plugins.push(new StyleLintPlugin({
+        context: 'src',
+        configFile: resolve('./stylelint.config.js'),
+        files: '**/*.{vue,html,css,less,sass,scss}',
+        // fix: true, // 交给vscode去做了
+        cache: true
+      }));
+    }
   }
 };

@@ -1,8 +1,14 @@
 .DS_Store
+
+
+# project
+dist
 node_modules
 mockServer/node_modules
 mockServer/upload
-/dist
+
+# cache
+.stylelintcache
 
 
 # local env files
@@ -17,7 +23,6 @@ pnpm-debug.log*
 
 # Editor directories and files
 .idea
-.vscode
 *.suo
 *.ntvs*
 *.njsproj

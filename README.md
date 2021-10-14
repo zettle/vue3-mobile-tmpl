@@ -188,6 +188,56 @@ oneOfsMap.forEach(item => {
 ```
 
 
+## 7、引入stylelint
+安装
+```shell
+npm i -D stylelint stylelint-config-standard stylelint-scss stylelint-order stylelint-config-rational-order stylelint-webpack-plugin
+```
+* `stylelint-scss`: 配合scss的
+* `stylelint-order`: 检查顺序的
+* `stylelint-config-rational-order`: 别人写好的order顺序，就不用自己写了
+* `stylelint-webpack-plugin`: 和webpack搭配的插件
+
+新建`stylelint.config.js`文件，用于配置stylelint的规则等配置信息
+
+新建`.stylelintignore`文件，用于配置要忽略检查的文件
+
+修改`package.json`，添加script脚本
+```json
+{
+  "lint:style": "stylelint **/*.{html,vue,css,sass,scss}",
+  "lint:styleFix": "stylelint **/*.{html,vue,css,sass,scss} --fix"
+}
+```
+
+在vscode安装stylelint插件，如果不符合规范就会为其标记红色warm
+
+修改`.vscode/settings.json`，这样保存的时候，就会自动格式化，如下
+```json
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": true
+  }
+}
+```
+
+修改`vue.config.js`，内容如下:
+```js
+if (process.env.NODE_ENV === 'development') {
+  config.plugins.push(new StyleLintPlugin({
+    context: 'src',
+    configFile: resolve('./stylelint.config.js'),
+    files: '**/*.{vue,html,css,less,sass,scss}',
+    cache: true
+  }));
+}
+```
+每次启动项目后，因为配置了`cache:true`，所以会生成缓存`.stylelintcache`这个文件，将其添加git忽略文件
+
+修改`.husy`，在commit的时候检查下style语法
+
+
+
 ## 其他
 ### 1、ios无点击反馈
 这是因为 iOS Safari 默认不会触发 :active 伪类，解决方法是在 body 标签上添加一个空的 ontouchstart 属性：
