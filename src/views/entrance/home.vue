@@ -1,7 +1,7 @@
 <template>
   <van-swipe
-    class="my-swipe"
     :autoplay="3000"
+    class="my-swipe"
     lazy-render>
     <van-swipe-item
       v-for="image in images"
@@ -29,6 +29,7 @@ export default defineComponent({
   }
 });
 </script>
+
 <style lang="scss" scoped>
 .my-swipe img {
   width: 100%;

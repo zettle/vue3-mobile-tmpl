@@ -1,7 +1,7 @@
 import { App } from 'vue';
 import { Button } from 'vant';
 import AppLayout from '@/components/baseCom/app-layout.vue';
-import SvgIcon from '@/components/baseCom/svg-icon';
+import SvgIcon from '@/components/baseCom/svg-icon/svg-icon';
 
 const components = [
   // vant组件

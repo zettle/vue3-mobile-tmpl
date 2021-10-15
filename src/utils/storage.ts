@@ -8,7 +8,7 @@ const namePreFix = 'myPre-';
  * @return {string} 完整的keyName
  */
 function getKeyName (key: string) {
-  return `${namePreFix}${key}`.toLowerCase();
+  return `${ namePreFix }${ key }`.toLowerCase();
 }
 
 /**
@@ -27,7 +27,7 @@ export default {
    * @param expire {Number} 有效期，单位毫秒
    * @param isLocalStorage 是否要用localStorage默认否
    */
-  set (name: string, value: any, isLocalStorage = false): void {
+  set (name: string, value: any, isLocalStorage = false): void { // eslint-disable-line @typescript-eslint/no-explicit-any
     const _storage = getLocalOrSession(isLocalStorage);
     // 再包装一层{value}，为了在get方法中JSON.parse的时候方便转化为ts泛型
     _storage.setItem(getKeyName(name), JSON.stringify({ value }));
@@ -46,7 +46,7 @@ export default {
       try {
         return JSON.parse(resStr).value as T;
       } catch (error) {
-        console.log(`JSON.parse转为-${name}-异常`, error);
+        console.log(`JSON.parse转为-${ name }-异常`, error);
       }
     }
     return null;

@@ -4,15 +4,15 @@
     <van-tabbar
       route>
       <van-tabbar-item
+        icon="wap-home"
         replace
-        to="/entrance/home"
-        icon="wap-home">
+        to="/entrance/home">
         首页
       </van-tabbar-item>
       <van-tabbar-item
+        icon="friends"
         replace
-        to="/entrance/mine"
-        icon="friends">
+        to="/entrance/mine">
         个人中心
       </van-tabbar-item>
     </van-tabbar>
@@ -23,7 +23,6 @@
 import { defineComponent } from 'vue';
 import { Tabbar, TabbarItem } from 'vant';
 export default defineComponent({
-  name: 'Home',
   components: {
     [Tabbar.name]: Tabbar,
     [TabbarItem.name]: TabbarItem

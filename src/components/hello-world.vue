@@ -6,8 +6,8 @@
       check out the
       <a
         href="https://cli.vuejs.org"
-        target="_blank"
-        rel="noopener">
+        rel="noopener noreferrer"
+        target="_blank">
         vue-cli documentation
       </a>.
     </p>
@@ -15,39 +15,50 @@
     <ul>
       <li>
         <a
-          target="_blank"
-          rel="noopener">
-          babel</a>
+          rel="noopener noreferrer"
+          target="_blank">
+          babel
+        </a>
       </li>
       <li>
         <a
           href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router"
-          target="_blank"
-          rel="noopener">router</a>
+          rel="noopener noreferrer"
+          target="_blank">
+          router
+        </a>
       </li>
       <li>
         <a
           href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex"
-          target="_blank"
-          rel="noopener">vuex</a>
+          rel="noopener noreferrer"
+          target="_blank">
+          vuex
+        </a>
       </li>
       <li>
         <a
           href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"
-          target="_blank"
-          rel="noopener">eslint</a>
+          rel="noopener noreferrer"
+          target="_blank">
+          eslint
+        </a>
       </li>
       <li>
         <a
           href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest"
-          target="_blank"
-          rel="noopener">unit-jest</a>
+          rel="noopener noreferrer"
+          target="_blank">
+          unit-jest
+        </a>
       </li>
       <li>
         <a
           href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript"
-          target="_blank"
-          rel="noopener">typescript</a>
+          rel="noopener noreferrer"
+          target="_blank">
+          typescript
+        </a>
       </li>
     </ul>
     <h3>Essential Links</h3>
@@ -55,32 +66,42 @@
       <li>
         <a
           href="https://vuejs.org"
-          target="_blank"
-          rel="noopener">Core Docs</a>
+          rel="noopener noreferrer"
+          target="_blank">
+          Core Docs
+        </a>
       </li>
       <li>
         <a
           href="https://forum.vuejs.org"
-          target="_blank"
-          rel="noopener">Forum</a>
+          rel="noopener noreferrer"
+          target="_blank">
+          Forum
+        </a>
       </li>
       <li>
         <a
           href="https://chat.vuejs.org"
-          target="_blank"
-          rel="noopener">Community Chat</a>
+          rel="noopener noreferrer"
+          target="_blank">
+          Community Chat
+        </a>
       </li>
       <li>
         <a
           href="https://twitter.com/vuejs"
-          target="_blank"
-          rel="noopener">Twitter</a>
+          rel="noopener noreferrer"
+          target="_blank">
+          Twitter
+        </a>
       </li>
       <li>
         <a
           href="https://news.vuejs.org"
-          target="_blank"
-          rel="noopener">News</a>
+          rel="noopener noreferrer"
+          target="_blank">
+          News
+        </a>
       </li>
     </ul>
     <h3>Ecosystem</h3>
@@ -88,32 +109,42 @@
       <li>
         <a
           href="https://router.vuejs.org"
-          target="_blank"
-          rel="noopener">vue-router</a>
+          rel="noopener noreferrer"
+          target="_blank">
+          vue-router
+        </a>
       </li>
       <li>
         <a
           href="https://vuex.vuejs.org"
-          target="_blank"
-          rel="noopener">vuex</a>
+          rel="noopener noreferrer"
+          target="_blank">
+          vuex
+        </a>
       </li>
       <li>
         <a
           href="https://github.com/vuejs/vue-devtools#vue-devtools"
-          target="_blank"
-          rel="noopener">vue-devtools</a>
+          rel="noopener noreferrer"
+          target="_blank">
+          vue-devtools
+        </a>
       </li>
       <li>
         <a
           href="https://vue-loader.vuejs.org"
-          target="_blank"
-          rel="noopener">vue-loader</a>
+          rel="noopener noreferrer"
+          target="_blank">
+          vue-loader
+        </a>
       </li>
       <li>
         <a
           href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-          rel="noopener">awesome-vue</a>
+          rel="noopener noreferrer"
+          target="_blank">
+          awesome-vue
+        </a>
       </li>
     </ul>
   </div>
@@ -123,7 +154,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'HelloWorld',
+  name: 'hello-world',
   props: {
     msg: { type: String, default: '' }
   }

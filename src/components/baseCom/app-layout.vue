@@ -8,6 +8,6 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'AppLayout'
+  name: 'app-layout'
 });
 </script>

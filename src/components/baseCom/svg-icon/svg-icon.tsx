@@ -9,13 +9,13 @@ const requireAll = (requireContext: __WebpackModuleApi.RequireContext) => {
 requireAll(req);
 
 export default defineComponent({
-  name: 'SvgIcon',
+  name: 'svg-icon',
   props: {
     iconClass: { type: String, required: true }
   },
   setup (props) {
-    const iconName = computed(() => `#icon-${props.iconClass}`);
-    const className = computed(() => `svg-icon svg-icon-${props.iconClass}`);
+    const iconName = computed(() => `#icon-${ props.iconClass }`);
+    const className = computed(() => `svg-icon svg-icon-${ props.iconClass }`);
     return () => (
       <svg
         aria-hidden="true"

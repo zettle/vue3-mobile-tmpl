@@ -1,7 +1,7 @@
 <template>
   <svg
     aria-hidden="true"
-    :class="['svg-icon', `svg-icon-${iconClass}`]">
+    :class="['svg-icon', `svg-icon-${ iconClass }`]">
     <use :xlink:href="iconName" />
   </svg>
 </template>
@@ -16,12 +16,12 @@ import { computed, defineComponent } from 'vue';
 // requireAll(req);
 
 export default defineComponent({
-  name: 'SvgIcon',
+  name: 'svg-icon',
   props: {
     iconClass: { type: String, required: true }
   },
   setup (props) {
-    const iconName = computed(() => `#icon-${props.iconClass}`);
+    const iconName = computed(() => `#icon-${ props.iconClass }`);
 
     return {
       iconName
