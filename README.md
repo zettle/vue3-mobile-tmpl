@@ -83,8 +83,20 @@ module.exports = {
 
 6. 引入`npm i -S normalize.css`，抹平浏览器默认样式差异
 
+> 经过尝试，更加推荐使用rem，因为vh布局有个不太好的地方就是不能实现这种效果: 让整个body控制在一个最大宽度，并且里面所有元素跟着整个比例
 
+安装`postcss-pxrorem`: `npm i - D postcss-pxtorem@5`。 安装5的版本，因为6以上的版本需要postcss8
 
+修改`postcss.config.js`:
+```js
+'postcss-pxtorem': {
+  rootValue: 37.5,
+  propList: ['*'],
+  minPixelValue: 2 // 小于2px的不会转为rem，等于2的还是会转
+  // selectorBlackList: [/^.van-\w*/], // 如果不想转rem的，就放开这个，但是不转的话，在大屏幕会感觉比例失调
+  // exclude: /node_modules/i // 忽略node_modules里面的，就不会转vant的
+}
+```
 
 ## 4、集成node server，mock数据
 使用koa2脚手架: `npm i -g koa-generator`

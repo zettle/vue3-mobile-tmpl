@@ -15,7 +15,8 @@
     "lint:style": "stylelint src/**/*.{html,vue,css,sass,scss}",
     "lint:styleFix": "stylelint src/**/*.{html,vue,css,sass,scss} --fix",
     "prepare": "husky install",
-    "commit": "cz"
+    "commit": "cz",
+    "precommit": "git add ."
   },
   "dependencies": {
     "axios": "^0.22.0",
@@ -53,6 +54,7 @@
     "husky": "^7.0.0",
     "nodemon": "^2.0.13",
     "postcss-px-to-viewport": "^1.1.1",
+    "postcss-pxtorem": "^5.1.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "sass-resources-loader": "^2.2.4",
