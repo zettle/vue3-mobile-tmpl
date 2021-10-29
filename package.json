@@ -15,8 +15,9 @@
     "lint:style": "stylelint src/**/*.{html,vue,css,sass,scss}",
     "lint:styleFix": "stylelint src/**/*.{html,vue,css,sass,scss} --fix",
     "prepare": "husky install",
+    "precommit": "git add .",
     "commit": "cz",
-    "precommit": "git add ."
+    "postcommit": "git push"
   },
   "dependencies": {
     "axios": "^0.22.0",
