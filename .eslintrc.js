@@ -23,8 +23,7 @@ module.exports = {
     'vue/html-closing-bracket-newline': ['warn', { // html的结束符/是否换行
       singleline: 'never', // 单行 never不换号
       multiline: 'never' // 多行 never不换号
-    }
-    ],
+    }],
     // html标签自闭合还是双闭合
     'vue/html-self-closing': ['error', {
       html: {
@@ -32,14 +31,12 @@ module.exports = {
         normal: 'never', // 普通html标签，除了上面的 img input等外的普通html标签，要双闭合
         component: 'never' // vue组件的，用双闭合
       }
-    }
-    ],
+    }],
     // 就算是class/style属性，也不要出现重复声明
     'vue/no-duplicate-attributes': ['error', {
       allowCoexistClass: false,
       allowCoexistStyle: false
-    }
-    ],
+    }],
     // 组件的name属性，用中横线命名法
     'vue/component-definition-name-casing': ['error', 'kebab-case'],
     // 写组件的时候，控制props按照字母排序，其他指令就安装默认值就好了
@@ -47,19 +44,16 @@ module.exports = {
       // order就安装默认值就好了
       // "order": ["DEFINITION","LIST_RENDERING","CONDITIONALS","RENDER_MODIFIERS","GLOBAL",["UNIQUE", "SLOT"],"TWO_WAY_BINDING","OTHER_DIRECTIVES","OTHER_ATTR","EVENTS","CONTENT"],
       alphabetical: true
-    }
-    ],
+    }],
     // template/script/style 3个标签的顺序
     'vue/component-tags-order': ['error', {
       order: ['docs', 'template', 'script', 'style']
-    }
-    ],
+    }],
     // html的内容是否要换行
     'vue/multiline-html-element-content-newline': ['error', {
       ignoreWhenEmpty: false, // 当内容是空的时候，也要换
       ignores: [] // 默认["pre", "textarea", ...INLINE_ELEMENTS]
-    }
-    ],
+    }],
     // 强制使用componentApi写法
     'vue/component-api-style': ['error',
       ['script-setup', 'composition'] // "script-setup", "composition", or "options"
@@ -68,8 +62,7 @@ module.exports = {
     'vue/component-name-in-template-casing': ['error', 'kebab-case', {
       registeredComponentsOnly: false, // 设置false检查所有的组件
       ignores: []
-    }
-    ],
+    }],
     // 自定义组件的emit('事件名') 中事件名用中横线
     'vue/custom-event-name-casing': ['error', 'kebab-case', { ignores: [] }],
     // button标签要声明type属性
@@ -78,8 +71,7 @@ module.exports = {
     'vue/match-component-file-name': ['error', {
       extensions: ['jsx', 'tsx', 'vue'],
       shouldMatchCase: true
-    }
-    ],
+    }],
     // 禁止使用废弃的v-is指令 vue3.1后废弃了v-is
     'vue/no-deprecated-v-is': ['error'],
     // 前置v-bind="$attrs"和`inheritance:false`一起使用
@@ -98,8 +90,7 @@ module.exports = {
     'vue/no-reserved-component-names': ['error', {
       disallowVueBuiltInComponents: true, // vue2的关键词
       disallowVue3BuiltInComponents: true // vue3的关键词
-    }
-    ],
+    }],
     // 警告不要在style中写纯静态的内容
     'vue/no-static-inline-styles': ['warn'],
     // 警告，当target="_blank"的时候，要和rel="noopener noreferrer"一起用
@@ -111,8 +102,7 @@ module.exports = {
     // @自定义事件的时候，用中横线
     'vue/v-on-event-hyphenation': ['error', 'always', {
       autofix: true // 启动自动修复
-    }
-    ],
+    }],
     // @事件的时候，参数如果是空则不用加()
     'vue/v-on-function-call': ['error', 'never'],
     // 连接符前后要空格，类似eslint的space-infix-ops
@@ -130,14 +120,16 @@ module.exports = {
     // 一定要明确写出类型边界类型
     '@typescript-eslint/explicit-module-boundary-types': ['error', {
       allowArgumentsExplicitlyTypedAsAny: true // 允许明确的使用any类型
-    }]
+    }],
+    // 不适用any
+    '@typescript-eslint/no-explicit-any': 'off'
   },
   overrides: [
     {
       files: [
         '**/__tests__/*.{j,t}s?(x)',
         '**/tests/unit/**/*.spec.{j,t}s?(x)'
-      ],
+],
       env: {
         jest: true
       }

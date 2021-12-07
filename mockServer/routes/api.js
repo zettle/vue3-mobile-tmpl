@@ -2,7 +2,11 @@ const router = require('koa-router')();
 
 router.prefix('/api');
 
-router.get('/', function (ctx, next) {
+router.get('/hhhh', function (ctx, next) {
+  throw new Error('hhhh');
+});
+
+router.all('/bar', function (ctx, next) {
   ctx.body = {
     code: 0,
     message: '成功',
@@ -13,9 +17,9 @@ router.get('/', function (ctx, next) {
   };
 });
 
-router.get('/bar', function (ctx, next) {
+router.all('/fail', function (ctx, next) {
   ctx.body = {
-    code: 0,
+    code: 1111,
     message: '成功',
     data: {
       name: 'xiaoming',

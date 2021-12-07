@@ -3,6 +3,8 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const tsImportPluginFactory = require('ts-import-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const Components = require('unplugin-vue-components/webpack');
+const { VantResolver } = require('unplugin-vue-components/resolvers');
 /* eslint-enable */
 
 function resolve (dir) {
@@ -40,24 +42,24 @@ module.exports = {
     /********************
      * vant的按需加载
      ********************/
-    config.module.rule('ts').use('ts-loader').tap(options => {
-      options = merge(options, {
-        transpileOnly: true,
-        getCustomTransformers: () => ({
-          before: [
-            tsImportPluginFactory({
-              libraryName: 'vant',
-              libraryDirectory: 'es',
-              style: true
-            })
-          ]
-        }),
-        compilerOptions: {
-          module: 'es2015'
-        }
-      });
-      return options;
-    });
+    // config.module.rule('ts').use('ts-loader').tap(options => {
+    //   options = merge(options, {
+    //     transpileOnly: true,
+    //     getCustomTransformers: () => ({
+    //       before: [
+    //         tsImportPluginFactory({
+    //           libraryName: 'vant',
+    //           libraryDirectory: 'es',
+    //           style: true
+    //         })
+    //       ]
+    //     }),
+    //     compilerOptions: {
+    //       module: 'es2015'
+    //     }
+    //   });
+    //   return options;
+    // });
 
     /********************
      * scss全局变量引入，不必每个页面都引入
@@ -87,5 +89,10 @@ module.exports = {
         cache: true
       }));
     }
+
+    // vant的自动按需加载
+    config.plugins.push(
+      Components({ resolvers: [ VantResolver() ] })
+    );
   }
 };
