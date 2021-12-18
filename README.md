@@ -3,11 +3,17 @@
 升级包
 ```shell
 # 更新vue全家桶
-npm i vue@next vuex@next vue-router@next
+npm i vue@next vue-router@next
 npm i -D  @vue/compiler-sfc
 
 # 更新语法检查
 npm i -D eslint-plugin-vue
+
+# 状态管理用pinia
+npm i pinia
+
+# UI库
+npm i vant@next
 ```
 
 ## 1、改动
@@ -22,6 +28,7 @@ npm i -D eslint-plugin-vue
 ## 2、vant
 安装: `npm i vant@next`
 
+### 方案一： 按需引入
 vant的按需加载，因为这个项目用的是ts，需要下面的操作
 
 1. 安装必要的包: `npm i -D webpack-merge ts-import-plugin`
@@ -56,19 +63,38 @@ module.exports = {
 };
 ```
 
+### 方案二： 自动引入（推荐）
+用替换上面的方案，实现自动引入
+1. 安装: `npm i -D unplugin-vue-components unplugin-auto-import`
 
+2. 修改`vue.config.js`，内容如下:
+```js
+const Components = require('unplugin-vue-components/webpack');
+const { VantResolver } = require('unplugin-vue-components/resolvers');
+
+module.exports = {
+  configureWebpack (config) {
+    config.plugins.push(
+      Components({ resolvers: [VantResolver()] })
+    );
+  }
+}
+```
 
 ## 3、移动端适配大小
-1. 修改`public/index.html`的`meta`信息，改为下面，禁止用户放大缩小页面
+修改`public/index.html`的`meta`信息，改为下面，禁止用户放大缩小页面
 ```html
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 ```
 
-2. 使用`viewport`来适配屏幕宽度，rem布局已经可以淘汰，但对应的，想要控制大屏的时候，限制下所有元素的最大尺寸目前没有想到实现方式
+### 方案一：使用viewport适配屏幕
+优点：现在的手机基本上都兼容不用考虑兼容问题
 
-3. 安装[postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport/blob/master/README_CN.md): `npm i -D postcss-px-to-viewport`
+缺点：想要控制大屏的时候，限制下所有元素的最大尺寸目前没有想到实现方式
 
-4. 修改`postcss.config.js`如下:
+1. 安装: `npm i -D postcss-px-to-viewport`
+
+2. 修改`postcss.config.js`如下:
 ```js
 module.exports = {
   plugins: {
@@ -79,33 +105,41 @@ module.exports = {
 };
 ```
 
-5. 把vant的也转下，不然有些大屏幕下看着vant的和自己的突兀挺大的
+3. 把vant的也转下，不然有些大屏幕下看着vant的和自己的突兀挺大的
 
-6. 引入`npm i -S normalize.css`，抹平浏览器默认样式差异
 
-> 经过尝试，更加推荐使用rem，因为vh布局有个不太好的地方就是不能实现这种效果: 让整个body控制在一个最大宽度，并且里面所有元素跟着整个比例
+### 方案二：使用rem适配屏幕（推荐）
+优点：能控制大屏的最大宽度。因为vh布局有个不太好的地方就是不能实现这种效果: 让整个body控制在一个最大宽度，并且里面所有元素跟着整个比例
 
-安装`postcss-pxrorem`: `npm i - D postcss-pxtorem@5`。 安装5的版本，因为6以上的版本需要postcss8
+缺点：老旧的方案
 
-修改`postcss.config.js`:
+1. 安装: `npm i - D postcss-pxtorem@5`。 安装5的版本，因为6以上的版本需要postcss8
+
+2. 修改`postcss.config.js`如下:
 ```js
-'postcss-pxtorem': {
-  rootValue: 37.5,
-  propList: ['*'],
-  minPixelValue: 2 // 小于2px的不会转为rem，等于2的还是会转
-  // selectorBlackList: [/^.van-\w*/], // 如果不想转rem的，就放开这个，但是不转的话，在大屏幕会感觉比例失调
-  // exclude: /node_modules/i // 忽略node_modules里面的，就不会转vant的
-}
+module.exports = {
+  plugins: {
+    'postcss-pxtorem': {
+      rootValue: 37.5,
+      propList: ['*'],
+      minPixelValue: 2 // 小于2px的不会转为rem，等于2的还是会转
+      // selectorBlackList: [/^.van-\w*/], // 如果不想转rem的，就放开这个，但是不转的话，在大屏幕会感觉比例失调
+      // exclude: /node_modules/i // 忽略node_modules里面的，就不会转vant的
+    }
+  }
+};
 ```
 
-## 4、集成node server，mock数据
-使用koa2脚手架: `npm i -g koa-generator`
+## 4、mock数据
 
-执行`koa2 -e mockServer`
+### 方案一：自己搭node 服务
+1. 安装koa2脚手架: `npm i -g koa-generator`
 
-安装nodemon: `npm i -D nodemon`
+2. 初始化koa项目: `koa2 -e mockServer`
 
-修改`nodemon.json`，只监听`mockServer`文件夹里面内容的变化，内容如下:
+3. 安装nodemon: `npm i -D nodemon`
+
+4. 修改`nodemon.json`，只监听`mockServer`文件夹里面内容的变化，内容如下:
 ```json
 {
   "watch": [
@@ -115,35 +149,46 @@ module.exports = {
 }
 ```
 
+5. 启动koa服务，执行`nodemon mockServer/bin/www`
+
+
+### 方案二（推荐）
+使用第3方提供的mock网站，下面几个都可以
+* [fastmock](https://www.fastmock.site/)
+
+
 
 ## 5、svg管理
 传统的svg是通过字体图标管理，但是借助iconfont等网站，存在时间长了，难以维护的问题
 
 这里使用另外一种方案，借助`svg-sprite-loader`工具，把svg的都放到项目中维护
 
-安装: `npm i -D svg-sprite-loader`
+1. 安装: `npm i -D svg-sprite-loader`
 
-修改`vue.config.js`如下:
+2. 修改`vue.config.js`如下:
 ```js
-chainWebpack (config) {
-  const svgIconPath = 'src/components/baseCom/svg-icon/icons';
-  config.module
-    .rule('svg') // 找个配置rule规则里面的svg
-    .exclude.add(resolve(svgIconPath)) // 项目除了制定文件夹有svg，可能其他地方有svg，这些其他地方svg应该有vue-cli原来的svg管理去管理
-    .end();
-  config.module
-    .rule('icons')// 配置rule规则里面新增的icons规则
-    .test(/\.svg$/)// icons规则里匹配到.svg结尾的文件
-    .include.add(resolve(svgIconPath)) // 包含src/icons下的.svg文件
-    .end()
-    .use('svg-sprite-loader')
-    .loader('svg-sprite-loader')
-    .options({ symbolId: 'icon-[name]' })// class名
-    .end();
+module.exports = {
+  chainWebpack (config) {
+    const svgIconPath = 'src/components/baseCom/svg-icon/icons';
+    config.module
+      .rule('svg')
+      .exclude.add(resolve(svgIconPath))
+      .end();
+    config.module
+      .rule('icons')
+      .test(/\.svg$/)
+      .include.add(resolve(svgIconPath))
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({ symbolId: 'icon-[name]' })
+      .end();
+  }
 }
 ```
 项目要用到的svg就复制到`/src/components/baseCom/svg-icon/icons/*`里面
 
+【注意：】vue文件提示`__WebpackModuleApi undefined`，需要改为tsx
 在`/src/components/baseCom/svg-icon.vue`，如果写上代码
 ```ts
 const req = require.context('./icons', false, /\.svg$/);
@@ -180,28 +225,32 @@ requireAll(req);
 
 
 ## 6、全局引入scss变量、mixins
-安装: `npm i -D sass-resources-loader`
+1. 安装: `npm i -D sass-resources-loader`
 
-修改`vue.config.js`，内容如下:
+2. 修改`vue.config.js`，内容如下:
 ```js
-const oneOfsMap = config.module.rule('scss').oneOfs.store;
-oneOfsMap.forEach(item => {
-  item
-    .use('sass-resources-loader')
-    .loader('sass-resources-loader')
-    .options({
-      resources: [
-        resolve('./src/assets/style/_variable.scss'),
-        resolve('./src/assets/style/_mixins.scss')
-      ]
-    })
-    .end();
-});
+module.exports = {
+  chainWebpack (config) {
+    const oneOfsMap = config.module.rule('scss').oneOfs.store;
+    oneOfsMap.forEach(item => {
+      item
+        .use('sass-resources-loader')
+        .loader('sass-resources-loader')
+        .options({
+          resources: [
+            resolve('./src/assets/style/_variable.scss'),
+            resolve('./src/assets/style/_mixins.scss')
+          ]
+        })
+        .end();
+    });
+  }
+};
 ```
 
 
 ## 7、引入stylelint
-安装
+1. 安装
 ```shell
 npm i -D stylelint stylelint-config-standard stylelint-scss stylelint-order stylelint-config-rational-order stylelint-webpack-plugin
 ```
@@ -210,11 +259,16 @@ npm i -D stylelint stylelint-config-standard stylelint-scss stylelint-order styl
 * `stylelint-config-rational-order`: 别人写好的order顺序，就不用自己写了
 * `stylelint-webpack-plugin`: 和webpack搭配的插件
 
-新建`stylelint.config.js`文件，用于配置stylelint的规则等配置信息
+2. 新建`stylelint.config.js`文件，用于配置stylelint的规则等配置信息
 
-新建`.stylelintignore`文件，用于配置要忽略检查的文件
+3. 新建`.stylelintignore`文件，用于配置要忽略检查的文件
+```txt
+node_modules
+mockServer
+dist
+```
 
-修改`package.json`，添加script脚本
+4. 修改`package.json`，添加script脚本
 ```json
 {
   "lint:style": "stylelint **/*.{html,vue,css,sass,scss}",
@@ -257,3 +311,9 @@ if (process.env.NODE_ENV === 'development') {
 <body ontouchstart="">
 </body>
 ```
+
+
+
+## 外链
+* [vant](https://vant-contrib.gitee.io/vant/v3/#/zh-CN)
+* [pinia](https://pinia.esm.dev/introduction.html)

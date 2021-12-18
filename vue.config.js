@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const { merge } = require('webpack-merge');
-const tsImportPluginFactory = require('ts-import-plugin');
+// const { merge } = require('webpack-merge');
+// const tsImportPluginFactory = require('ts-import-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const Components = require('unplugin-vue-components/webpack');
 const { VantResolver } = require('unplugin-vue-components/resolvers');
@@ -24,7 +24,7 @@ module.exports = {
     /********************
      * svg管理
      ********************/
-    const svgIconPath = 'src/components/baseCom/svg-icon/icons';
+    const svgIconPath = 'src/components/baseCom/svg-icon/icons'; // svg的路径
     config.module
       .rule('svg') // 找个配置rule规则里面的svg
       .exclude.add(resolve(svgIconPath)) // 项目除了制定文件夹有svg，可能其他地方有svg，这些其他地方svg应该有vue-cli原来的svg管理去管理
@@ -92,7 +92,7 @@ module.exports = {
 
     // vant的自动按需加载
     config.plugins.push(
-      Components({ resolvers: [ VantResolver() ] })
+      Components({ resolvers: [VantResolver()] })
     );
   }
 };

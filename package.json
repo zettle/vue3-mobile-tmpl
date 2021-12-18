@@ -23,10 +23,10 @@
     "axios": "^0.22.0",
     "core-js": "^3.6.5",
     "normalize.css": "^8.0.1",
+    "pinia": "^2.0.6",
     "unplugin-vue-components": "^0.17.2",
-    "vue": "^3.2.20",
-    "vue-router": "^4.0.11",
-    "vuex": "^4.0.2"
+    "vue": "^3.2.26",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.2.1",
@@ -41,7 +41,7 @@
     "@vue/cli-plugin-unit-jest": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.2.20",
+    "@vue/compiler-sfc": "^3.2.26",
     "@vue/eslint-config-standard": "^5.1.2",
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^2.0.0-0",
@@ -52,7 +52,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^7.19.1",
+    "eslint-plugin-vue": "^7.20.0",
     "husky": "^7.0.0",
     "nodemon": "^2.0.13",
     "postcss-px-to-viewport": "^1.1.1",
