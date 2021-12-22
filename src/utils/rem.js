@@ -3,9 +3,9 @@
 *****************************************/
 const baseSize = 37.5; // 注意此值要与 postcss.config.js 文件中的 rootValue保持一致
 const doc = document.documentElement;
-const maxFontSize = 80;
+const maxFontSize = 70;
 
-document.body.style = `max-width:${ maxFontSize * 10 }px`; // 具体多少无所谓，只是觉得800px整个页面差不多比例
+document.body.style = `max-width:${ maxFontSize * 10 }px;margin-left:auto;margin-right:auto`; // 具体多少无所谓，只是觉得800px整个页面差不多比例
 
 function setRem () {
   // 当前页面宽度相对于 750宽的缩放比例，可根据自己需要修改,一般设计稿都是宽750(图方便可以拿到设计图后改过来)。

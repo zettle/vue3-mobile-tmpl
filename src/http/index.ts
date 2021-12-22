@@ -1,5 +1,3 @@
-import Request from './request';
-
-export default new Request({
-  baseURL: 'http://yapi.smart-xwork.cn/mock/119164'
-});
+export { default as respFail } from './request/respFail';
+export * from './api/fail';
+export * from './api/login';

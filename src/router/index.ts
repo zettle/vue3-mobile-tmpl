@@ -7,4 +7,8 @@ const router = createRouter({
   routes
 });
 
+// router.afterEach((to: any) => {
+//   console.log('afterEach', to);
+// });
+
 export default router;

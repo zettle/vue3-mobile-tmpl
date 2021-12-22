@@ -1,5 +1,5 @@
 <template>
-  <app-layout>
+  <div>
     <router-view></router-view>
     <van-tabbar
       route>
@@ -16,7 +16,7 @@
         个人中心
       </van-tabbar-item>
     </van-tabbar>
-  </app-layout>
+  </div>
 </template>
 
 <script lang="ts">

@@ -1,4 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router';
+import viewPage from './viewPage.vue';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -6,9 +7,10 @@ const routes: RouteRecordRaw[] = [
     redirect: '/entrance/home'
   },
   {
-    path: '/piniaDemo',
-    name: 'PiniaDemo',
-    component: () => import('../views/pinia-demo.vue')
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/login.vue'),
+    meta: { title: '登录' }
   },
   {
     path: '/entrance',
@@ -16,11 +18,24 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: 'home',
-        component: () => import('../views/entrance/home.vue')
+        component: () => import('../views/entrance/home.vue'),
+        meta: { title: '首页' }
       },
       {
         path: 'mine',
-        component: () => import('../views/entrance/mine.vue')
+        component: () => import('../views/entrance/mine.vue'),
+        meta: { title: '个人中心' }
+      }
+    ]
+  },
+  {
+    path: '/demo',
+    component: viewPage,
+    children: [
+      {
+        path: 'axios',
+        component: () => import('../views/demo/axios.vue'),
+        meta: { title: 'axios测试页面' }
       }
     ]
   }

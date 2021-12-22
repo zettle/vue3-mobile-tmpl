@@ -17,12 +17,13 @@
     "prepare": "husky install",
     "precommit": "git add .",
     "commit": "cz",
-    "postcommit": "git push"
+    "postcommit": "git push",
+    "push": "git push",
+    "prepush": "npm run commit"
   },
   "dependencies": {
     "axios": "^0.22.0",
     "core-js": "^3.6.5",
-    "normalize.css": "^8.0.1",
     "pinia": "^2.0.6",
     "unplugin-vue-components": "^0.17.2",
     "vue": "^3.2.26",
@@ -56,7 +57,6 @@
     "husky": "^7.0.0",
     "nodemon": "^2.0.13",
     "postcss-px-to-viewport": "^1.1.1",
-    "postcss-pxtorem": "^5.1.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "sass-resources-loader": "^2.2.4",

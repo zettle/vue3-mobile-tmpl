@@ -87,7 +87,7 @@ module.exports = {
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 ```
 
-### 方案一：使用viewport适配屏幕
+### 方案一：使用viewport适配屏幕（推荐）
 优点：现在的手机基本上都兼容不用考虑兼容问题
 
 缺点：想要控制大屏的时候，限制下所有元素的最大尺寸目前没有想到实现方式
@@ -108,7 +108,7 @@ module.exports = {
 3. 把vant的也转下，不然有些大屏幕下看着vant的和自己的突兀挺大的
 
 
-### 方案二：使用rem适配屏幕（推荐）
+### 方案二：使用rem适配屏幕
 优点：能控制大屏的最大宽度。因为vh布局有个不太好的地方就是不能实现这种效果: 让整个body控制在一个最大宽度，并且里面所有元素跟着整个比例
 
 缺点：老旧的方案
@@ -131,8 +131,8 @@ module.exports = {
 ```
 
 ## 4、mock数据
-
-### 方案一：自己搭node 服务
+模拟后端数据
+### 方案一：自己搭node 服务（推荐）
 1. 安装koa2脚手架: `npm i -g koa-generator`
 
 2. 初始化koa项目: `koa2 -e mockServer`
@@ -152,8 +152,9 @@ module.exports = {
 5. 启动koa服务，执行`nodemon mockServer/bin/www`
 
 
-### 方案二（推荐）
-使用第3方提供的mock网站，下面几个都可以
+### 方案二
+使用第3方提供的mock网站，下面几个都可以，但不能模拟上传、下载，图片预览等效果
+
 * [fastmock](https://www.fastmock.site/)
 
 
@@ -304,6 +305,12 @@ if (process.env.NODE_ENV === 'development') {
 
 
 
+## 8、axios的封装
+axios的封装
+
+
+
+
 ## 其他
 ### 1、ios无点击反馈
 这是因为 iOS Safari 默认不会触发 :active 伪类，解决方法是在 body 标签上添加一个空的 ontouchstart 属性：
@@ -312,6 +319,8 @@ if (process.env.NODE_ENV === 'development') {
 </body>
 ```
 
+### 2、去掉`normalize.css`
+本来想着引入`normalize.css`重置先css样式，发现很多没有重置到，不符合自己的效果，移除
 
 
 ## 外链

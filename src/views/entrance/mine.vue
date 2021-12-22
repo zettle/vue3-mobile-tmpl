@@ -1,22 +1,29 @@
 <template>
-  <app-layout>
-    <van-cell
-      is-link
-      title="vantUI 外链"
-      @click="openVantUrl">
-    </van-cell>
+  <van-cell
+    is-link
+    title="去登陆"
+    @click="goLoginPage">
+  </van-cell>
 
-    <van-cell
-      v-for="(item, $index) of pageRoutes"
-      :key="$index"
-      is-link
-      :title="item.title"
-      :to="item.to">
-    </van-cell>
-  </app-layout>
+  <van-cell
+    is-link
+    title="vantUI 外链"
+    @click="openVantUrl">
+  </van-cell>
+
+  <van-cell
+    v-for="(item, $index) of pageRoutes"
+    :key="$index"
+    is-link
+    :title="item.title"
+    :to="item.to">
+  </van-cell>
 </template>
 
 <script lang="ts" setup>
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
 /**
  * 打开vantUI外链
  */
@@ -30,10 +37,15 @@ function openVantUrl () {
  */
 const pageRoutes = [
   {
-    title: 'pinia demo',
-    to: {
-      name: 'PiniaDemo'
-    }
+    title: 'axios请求',
+    to: '/demo/axios'
   }
 ];
+
+/**
+ * 去登录页面
+ */
+function goLoginPage () {
+  router.push('/login');
+}
 </script>
