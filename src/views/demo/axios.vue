@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import { fetchFail, fetchLogin, fetchUnfind, respFail } from '@/http';
+import { respFail, fetchLogin, fetchFail, IFailType, fetchUnfind } from '@/http';
 
 // 正常返回数据
 async function handleNormal () {
@@ -52,8 +52,8 @@ async function handleWarning () {
     console.log('0的处理', data.type);
   } catch (err) {
     if (err instanceof respFail) {
-      const { resp } = err;
-      console.log('非0的处理', resp.data);
+      const data = err.resp.data as IFailType;
+      console.log('非0的处理', data);
     }
   }
 }

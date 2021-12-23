@@ -1,14 +1,14 @@
 <template>
   <van-cell
     is-link
-    title="去登陆"
-    @click="goLoginPage">
+    title="vantUI 外链"
+    @click="openVantUrl">
   </van-cell>
 
   <van-cell
     is-link
-    title="vantUI 外链"
-    @click="openVantUrl">
+    title="去登陆"
+    @click="goLoginPage">
   </van-cell>
 
   <van-cell
@@ -36,14 +36,9 @@ function openVantUrl () {
  * 本地页面配置
  */
 const pageRoutes = [
-  {
-    title: 'axios请求',
-    to: '/demo/axios'
-  },
-  {
-    title: '滚动的问题',
-    to: '/demo/scroll/first'
-  }
+  { title: 'axios请求', to: '/demo/axios' },
+  { title: '滚动的问题', to: '/demo/scroll/first' },
+  { title: 'storage的封装', to: '/demo/storage' }
 ];
 
 /**

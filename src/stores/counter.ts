@@ -1,7 +1,12 @@
 import { defineStore } from 'pinia';
-import storage from '@/utils/storage';
+import { SessionStorage } from '@/storage';
 
-const useCounterStore = defineStore('counter', {
+interface ICounterState {
+  count: number;
+  name: string;
+}
+
+const useCounterStore = defineStore<'counter', ICounterState>('counter', {
   state: () => ({
     count: 0,
     name: '夏明'
@@ -25,13 +30,13 @@ const useCounterStore = defineStore('counter', {
   }
 });
 
-// 持久化: 存储
+// 持久化
 const instance = useCounterStore();
+const counterStorage = new SessionStorage<ICounterState>(instance.$id);
 instance.$subscribe((_, state) => {
-  storage.set(instance.$id, state);
+  counterStorage.set(state);
 });
-// 持久化: 获取
-const re = storage.get<any>(instance.$id);
-re && instance.$patch({ ...re });
+const storageResult = counterStorage.get();
+storageResult && instance.$patch({ ...storageResult });
 
 export default useCounterStore;

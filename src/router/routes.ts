@@ -52,6 +52,11 @@ const routes: RouteRecordRaw[] = [
             meta: { title: '滚动问题' }
           }
         ]
+      },
+      {
+        path: 'storage',
+        component: () => import('../views/demo/storage.vue'),
+        meta: { title: 'storage测试' }
       }
     ]
   }

@@ -32,6 +32,8 @@ export default {
 
 <style lang="scss" scoped>
 .page {
+  width: 100vw;
+  min-height: 100vh;
   background-color: #f7f8fa;
 }
 </style>

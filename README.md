@@ -310,6 +310,23 @@ axios的封装
 
 
 
+## 9、storage
+以前封装的`strage.ts`感觉还是太自由了，这次重新封装了个`/src/storage/stroageBase.ts`
+
+主要想要和ts结合，约束`sessionStorage.get()/sessionStorage.set()`
+
+封装后，要先实例化下 storage 的实例，并且传入泛型，等到`get()`的时候，就自动有了泛型
+```js
+interface Itype {
+  name: string;
+  age: number;
+}
+const storage = new SessionStorage<Itype>();
+storage.set({ name:'xxx', age:23 });
+storage.get(); // 自动推导类型
+```
+
+
 
 ## 其他问题和优化
 #### 1. ios无点击反馈
@@ -347,3 +364,16 @@ body, html, #app, .page { width: 100%; min-height: 100vh; }
 * [vant](https://vant-contrib.gitee.io/vant/v3/#/zh-CN)
 * [pinia](https://pinia.esm.dev/introduction.html)
 * [vueRouter滚动行为](https://next.router.vuejs.org/zh/guide/advanced/scroll-behavior.html)
+
+
+
+
+## 待解决问题
+
+### 1、api的自动导入导出方案
+在 `/src/http/api/*` 里面定义了很多接口，然后在`/src/http/index.ts`做统一导入导出
+
+本来想着用`require.context()`做自动导入，发现对于`export interface xxx`的ts声明，无法导入和导出
+
+
+
