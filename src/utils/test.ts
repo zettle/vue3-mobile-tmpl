@@ -4,6 +4,7 @@ interface ISuccessType {
 }
 
 interface IFailType {
+  code: number;
   msg: string;
 }
 
@@ -12,6 +13,7 @@ const successInfo = {
   age: 23
 };
 const failInfo: IFailType = {
+  code: 1000,
   msg: '错误信息'
 };
 
@@ -28,7 +30,11 @@ function ajax<T> (isOk: boolean, successInfo: T, failInfo: any): Promise<T> {
 }
 
 async function login () {
-  const resp = await ajax<ISuccessType>(true, successInfo, failInfo);
-  console.log(resp);
+  try {
+    const resp = await ajax<ISuccessType>(false, successInfo, failInfo);
+    console.log(resp);
+  } catch (err) {
+    console.log('err', (err as ISuccessType).age);
+  }
 }
 login();

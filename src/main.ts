@@ -1,11 +1,10 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import './assets/style/index.scss';
-// import './utils/rem';
 import App from './App.vue';
 import router from './router';
 import regGlobal from './global';
-import './utils/test';
+// import './utils/test';
 
 const app = createApp(App);
 app.use(createPinia());

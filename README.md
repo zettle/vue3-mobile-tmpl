@@ -311,18 +311,39 @@ axios的封装
 
 
 
-## 其他
-### 1、ios无点击反馈
+## 其他问题和优化
+#### 1. ios无点击反馈
 这是因为 iOS Safari 默认不会触发 :active 伪类，解决方法是在 body 标签上添加一个空的 ontouchstart 属性：
 ```html
 <body ontouchstart="">
 </body>
 ```
 
-### 2、去掉`normalize.css`
+#### 2. 去掉`normalize.css`
 本来想着引入`normalize.css`重置先css样式，发现很多没有重置到，不符合自己的效果，移除
 
+#### 3. 滚动问题
+在 `/scroll/first.vue` 滚动到一定距离之后，再去 `/scroll/second.vue` 页面
+
+会发现`second.vue`沿用了`first.vue`的滚动距离
+
+解决方式: [vueRouter滚动行为](https://next.router.vuejs.org/zh/guide/advanced/scroll-behavior.html)
+
+
+#### 4. 让页面最小一个屏幕高度，最大适应内容高度
+在以前的写法，会用下面scss:
+```scss
+body, html, #app, .page { width: 100%; min-height: 100vh; }
+```
+上面很不方便就是一层层的设置高度，现在可以用更viewpoint设置:
+```scss
+.page {
+  width: 100vw;
+  min-height: 100vh;
+}
+```
 
 ## 外链
 * [vant](https://vant-contrib.gitee.io/vant/v3/#/zh-CN)
 * [pinia](https://pinia.esm.dev/introduction.html)
+* [vueRouter滚动行为](https://next.router.vuejs.org/zh/guide/advanced/scroll-behavior.html)

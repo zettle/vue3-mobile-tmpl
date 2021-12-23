@@ -36,6 +36,22 @@ const routes: RouteRecordRaw[] = [
         path: 'axios',
         component: () => import('../views/demo/axios.vue'),
         meta: { title: 'axios测试页面' }
+      },
+      {
+        path: 'scroll',
+        component: viewPage,
+        children: [
+          {
+            path: 'first',
+            component: () => import('../views/demo/scroll/first.vue'),
+            meta: { title: '滚动问题' }
+          },
+          {
+            path: 'second',
+            component: () => import('../views/demo/scroll/second.vue'),
+            meta: { title: '滚动问题' }
+          }
+        ]
       }
     ]
   }
