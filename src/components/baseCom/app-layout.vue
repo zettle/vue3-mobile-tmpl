@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div :class="['page', { white: isWhitePage }]">
     <van-nav-bar
       left-arrow
       :title="pageTitle"
@@ -10,7 +10,12 @@
 </template>
 
 <script lang="ts" setup>
+import { defineProps } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+
+defineProps({
+  isWhitePage: { type: Boolean }
+});
 
 const route = useRoute();
 const router = useRouter();
@@ -22,6 +27,10 @@ function handleClickLeft () {
   console.log('handleClickLeft');
   router.go(-1);
 }
+
+window.addEventListener('scroll', () => {
+  console.log('scroll');
+}, false);
 </script>
 
 <script lang="ts">
@@ -35,5 +44,9 @@ export default {
   width: 100vw;
   min-height: 100vh;
   background-color: #f7f8fa;
+
+  &.white {
+    background-color: #fff;
+  }
 }
 </style>

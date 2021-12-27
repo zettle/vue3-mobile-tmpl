@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { SessionStorage } from '@/storage';
+import { defineSessionStorage } from '@/storage';
 
 interface ICounterState {
   count: number;
@@ -32,7 +32,7 @@ const useCounterStore = defineStore<'counter', ICounterState>('counter', {
 
 // 持久化
 const instance = useCounterStore();
-const counterStorage = new SessionStorage<ICounterState>(instance.$id);
+const counterStorage = defineSessionStorage<ICounterState>(instance.$id);
 instance.$subscribe((_, state) => {
   counterStorage.set(state);
 });

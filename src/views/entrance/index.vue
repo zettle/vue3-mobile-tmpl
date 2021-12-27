@@ -1,51 +1,28 @@
 <template>
-  <div>
+  <div class="entrance-content">
     <router-view></router-view>
-    <van-tabbar
-      route>
-      <van-tabbar-item
-        icon="wap-home"
-        replace
-        to="/entrance/home">
-        首页
-      </van-tabbar-item>
-      <van-tabbar-item
-        icon="friends"
-        replace
-        to="/entrance/mine">
-        个人中心
-      </van-tabbar-item>
-    </van-tabbar>
   </div>
+  <van-tabbar route>
+    <van-tabbar-item
+      v-for="(item, $index) of switchBar"
+      :key="$index"
+      :icon="item.icon"
+      replace
+      :to="item.url">
+      {{ item.name }}
+    </van-tabbar-item>
+  </van-tabbar>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { Tabbar, TabbarItem } from 'vant';
-export default defineComponent({
-  components: {
-    [Tabbar.name]: Tabbar,
-    [TabbarItem.name]: TabbarItem
-  },
-  setup () {
-    // console.log(process.env.VUE_APP_ENV);
-    // axios.get('/channel_api/bar').then(res => {
-    //   console.log(res.data);
-    // });
-  }
-});
+<script lang="ts" setup>
+const switchBar = [
+  { icon: 'wap-home', name: '首页', url: '/entrance/home' },
+  { icon: 'friends', name: '个人中心', url: '/entrance/mine' }
+];
 </script>
 
-<style lang="scss">
-.svg-icon-camera {
-  color: $primary-color;
-  font-size: 30px;
-}
-
-.svg-icon-rmb {
-  color: red;
-  font-size: 30px;
-
-  @include rounded-corners;
+<style lang="scss" scoped>
+.entrance-content {
+  padding-bottom: var(--van-tabbar-height);
 }
 </style>

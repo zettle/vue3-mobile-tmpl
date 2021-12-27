@@ -1,5 +1,5 @@
 <template>
-  <app-layout>
+  <app-layout is-white-page>
     <p class="demo-title">
       基本使用
     </p>
@@ -18,23 +18,63 @@
       @click="handleTake">
       取
     </van-button>
+    <van-button
+      class="s-her"
+      type="primary"
+      @click="handleDel">
+      删
+    </van-button>
+    <van-button
+      class="s-her"
+      type="primary"
+      @click="handleClear">
+      清空
+    </van-button>
+    <van-divider>过期时间</van-divider>
+    <p class="s-her">
+      第2个参数控制过期时间，单位毫秒
+    </p>
+    <van-button
+      class="s-her"
+      type="primary"
+      @click="handleSaveExpire(1000)">
+      存1s
+    </van-button>
+    <van-button
+      class="s-her"
+      type="primary"
+      @click="handleTakeExpire">
+      取
+    </van-button>
   </app-layout>
 </template>
 
 <script lang="ts" setup>
-import { useSessionStorage } from '@/storage';
+import { userCountStorage, SessionStorage } from '@/storage';
 
 const model = {
   name: 'xiaoming',
   age: 23
 };
-
-const testStorage = useSessionStorage<typeof model>('test');
+// 普通存储
 function handleSave () {
-  testStorage.set(model);
+  userCountStorage.set(model);
 }
 function handleTake () {
-  const storageCache = testStorage.get();
-  console.log(storageCache, storageCache?.age);
+  console.log(userCountStorage.get());
+}
+function handleDel () {
+  userCountStorage.remove();
+}
+function handleClear () {
+  SessionStorage.clear();
+}
+
+// 过期时间的存储
+function handleSaveExpire (expire: number) {
+  userCountStorage.set(model, expire);
+}
+function handleTakeExpire () {
+  console.log(userCountStorage.get());
 }
 </script>

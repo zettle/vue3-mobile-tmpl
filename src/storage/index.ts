@@ -1,9 +1,14 @@
-import { LocalStorage, SessionStorage } from './storageBase';
+import { LocalStorage, SessionStorage, defineLocalStorage, defineSessionStorage } from './storageBase';
 
-export function useSessionStorage<T> (keyName: string): SessionStorage<T> {
-  return new SessionStorage<T>(keyName);
-}
+export {
+  LocalStorage,
+  SessionStorage,
+  defineLocalStorage,
+  defineSessionStorage
+};
 
-export function useLocalStorage<T> (keyName: string): LocalStorage<T> {
-  return new LocalStorage<T>(keyName);
+interface ICountStorage {
+  name: string;
+  age: number;
 }
+export const userCountStorage = defineSessionStorage<ICountStorage>('count');

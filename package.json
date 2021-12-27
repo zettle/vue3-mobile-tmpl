@@ -5,9 +5,9 @@
   "scripts": {
     "start": "vue-cli-service serve",
     "server": "nodemon mockServer/bin/www",
-    "sit": "vue-cli-service build --mode sit",
-    "uat": "vue-cli-service build --mode uat",
-    "prod": "vue-cli-service build --mode production",
+    "build:sit": "vue-cli-service build --mode sit",
+    "build:uat": "vue-cli-service build --mode uat",
+    "build:prod": "vue-cli-service build --mode production",
     "report": "vue-cli-service build --mode production --report",
     "test": "vue-cli-service test:unit",
     "lint:js": "vue-cli-service lint",
@@ -18,16 +18,13 @@
     "prepare": "husky install",
     "precommit": "git add .",
     "commit": "cz",
-    "postcommit": "git push",
-    "push": "git push",
-    "prepush": "npm run commit"
+    "postcommit": "git push"
   },
   "dependencies": {
     "axios": "^0.22.0",
     "core-js": "^3.6.5",
     "crypto-js": "^4.1.1",
     "pinia": "^2.0.6",
-    "unplugin-vue-components": "^0.17.2",
     "vue": "^3.2.26",
     "vue-router": "^4.0.12"
   },
@@ -71,6 +68,7 @@
     "svg-sprite-loader": "^6.0.9",
     "ts-import-plugin": "^1.6.7",
     "typescript": "~4.1.5",
+    "unplugin-vue-components": "^0.17.2",
     "vant": "^3.2.5",
     "vue-jest": "^5.0.0-0",
     "webpack-merge": "^5.8.0"
