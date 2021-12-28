@@ -37,7 +37,8 @@ function openVantUrl () {
 const pageRoutes = [
   { title: 'axios请求', to: '/demo/axios' },
   { title: '滚动的问题', to: '/demo/scroll/first' },
-  { title: 'storage的封装', to: '/demo/storage' }
+  { title: 'storage的封装', to: '/demo/storage' },
+  { title: 'pinia测试', to: '/demo/pinia' }
 ];
 
 /**

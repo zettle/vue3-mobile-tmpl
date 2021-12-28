@@ -1,3 +1,5 @@
+import { encryption, decrypt } from '@/utils/cryptoBase64';
+
 // storage存的value的格式
 interface IStorageValue<T> {
   value: T;
@@ -50,7 +52,7 @@ class BaseStorage<T = any> {
       }
       storageValue.expire = new Date().getTime() + expire;
     }
-    this.webStorage.setItem(this.storageKeyName, JSON.stringify(storageValue));
+    this.webStorage.setItem(this.storageKeyName, encryption(JSON.stringify(storageValue)));
   }
 
   /**
@@ -62,7 +64,7 @@ class BaseStorage<T = any> {
     if (!resStr) { return null; }
 
     try {
-      const storageValue: IStorageValue<T> = JSON.parse(resStr);
+      const storageValue: IStorageValue<T> = JSON.parse(decrypt(resStr));
       // 判断是否过期
       if (this.isValidPeriod(storageValue)) {
         return storageValue.value;
@@ -84,41 +86,42 @@ class BaseStorage<T = any> {
    * 清除整个缓存
    * 要判断下是不是该项目开头的前缀，否则会误删其他的key
    */
-  static clear (webStorage: Storage): void {
-    Object.keys(webStorage).forEach(key => {
-      if (key.startsWith(BaseStorage.prefix)) {
-        webStorage.removeItem(key);
-      }
-    });
+  static clear (queue: Set<BaseStorage>): void {
+    queue.forEach(item => { item.remove(); });
+    queue.clear();
   }
 }
 
 // localstorage的封装类
 export class LocalStorage<T = any> extends BaseStorage<T> {
+  static queue = new Set<LocalStorage>();
   constructor (itemName: string) {
     super(true, itemName);
+    LocalStorage.queue.add(this);
   }
 
   static clear (): void {
-    super.clear(window.sessionStorage);
+    super.clear(LocalStorage.queue);
   }
 }
 
 // sessionstorage的封装类
 export class SessionStorage<T = any> extends BaseStorage<T> {
+  static queue = new Set<SessionStorage>();
   constructor (itemName: string) {
     super(false, itemName);
+    SessionStorage.queue.add(this);
   }
 
   static clear (): void {
-    super.clear(window.sessionStorage);
+    super.clear(SessionStorage.queue);
   }
 }
 
-export function defineSessionStorage<T> (keyName: string): SessionStorage<T> {
+export function defineSessionStorage<T = any> (keyName: string): SessionStorage<T> {
   return new SessionStorage<T>(keyName);
 }
 
-export function defineLocalStorage<T> (keyName: string): LocalStorage<T> {
+export function defineLocalStorage<T = any> (keyName: string): LocalStorage<T> {
   return new LocalStorage<T>(keyName);
 }

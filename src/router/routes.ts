@@ -57,6 +57,11 @@ const routes: RouteRecordRaw[] = [
         path: 'storage',
         component: () => import('../views/demo/storage.vue'),
         meta: { title: 'storage测试' }
+      },
+      {
+        path: 'pinia',
+        component: () => import('../views/demo/pinia.vue'),
+        meta: { title: 'pinia测试' }
       }
     ]
   }

@@ -37,7 +37,7 @@
     <van-button
       class="s-her"
       type="primary"
-      @click="handleSaveExpire(1000)">
+      @click="handleSaveExpire">
       存1s
     </van-button>
     <van-button
@@ -67,10 +67,10 @@ function handleClear () {
 }
 
 // 过期时间的存储
-function handleSaveExpire (expire: number) {
-  console.log(sessionStorage.getItem('state'), expire);
+function handleSaveExpire () {
+  userCountStorage.set({ name: 'xiaoming', age: 23 }, 1000);
 }
 function handleTakeExpire () {
-  console.log(sessionStorage.getItem('state'));
+  console.log(userCountStorage.get());
 }
 </script>

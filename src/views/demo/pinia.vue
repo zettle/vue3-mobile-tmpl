@@ -10,7 +10,7 @@
     plain
     type="primary"
     @click="handleChangeName">
-    异步改变name: {{ counterStore.name }}
+    1s后改变: {{ counterStore.name }}
   </van-button>
 </template>
 
@@ -29,7 +29,7 @@ function handleAddCount () {
  * 点击【异步改变name】
  */
 function handleChangeName () {
-  const newName = `${ counterStore.name }_new`;
+  const newName = `${ counterStore.name }_n`;
   counterStore.incrementAsync(newName);
 }
 </script>
