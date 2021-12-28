@@ -52,13 +52,9 @@
 <script lang="ts" setup>
 import { userCountStorage, SessionStorage } from '@/storage';
 
-const model = {
-  name: 'xiaoming',
-  age: 23
-};
-// 普通存储
+// 普通存储的 存删查
 function handleSave () {
-  userCountStorage.set(model);
+  userCountStorage.set({ name: 'xiaoming', age: 23 });
 }
 function handleTake () {
   console.log(userCountStorage.get());
@@ -72,9 +68,9 @@ function handleClear () {
 
 // 过期时间的存储
 function handleSaveExpire (expire: number) {
-  userCountStorage.set(model, expire);
+  console.log(sessionStorage.getItem('state'), expire);
 }
 function handleTakeExpire () {
-  console.log(userCountStorage.get());
+  console.log(sessionStorage.getItem('state'));
 }
 </script>

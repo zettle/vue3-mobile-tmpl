@@ -368,6 +368,30 @@ body, html, #app, .page { width: 100%; min-height: 100vh; }
 
 
 
+## 以后可能会用到的
+### 1、单例模式
+```ts
+class Person {
+  private static instance: Person;
+  // constructor修饰为private，就能限制外面通过new出实例
+  private constructor (public cname: string) {}
+
+  // 需要static这样外面才能在不实例化的情况下调用
+  static getInstance (cname: string) {
+    if (!this.instance) {
+      this.instance = new Person(cname)
+    }
+    return this.instance;
+  }
+}
+
+const p1 = Person.getInstance('xiaoming');
+const p2 = Person.getInstance('xiaohong');
+console.log(p1 === p2);
+console.log(p1.cname, p2.cname);// 都是xiaoming，因为不会再实例化第2次，也就是xiaohong不会生效
+```
+
+
 ## 待解决问题
 
 ### 1、api的自动导入导出方案

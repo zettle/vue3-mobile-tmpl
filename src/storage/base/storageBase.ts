@@ -6,7 +6,7 @@ interface IStorageValue<T> {
 
 class BaseStorage<T = any> {
   private webStorage: Storage; // 要控制的是local还是session
-  private readonly prefix = 'mypro-';
+  private static readonly prefix = 'mypro-';
   /**
    * 构造函数
    * @param isLocalStorage 是否使用localstorage
@@ -20,7 +20,7 @@ class BaseStorage<T = any> {
    * 获取完整的keyName名称
    */
   private get storageKeyName () {
-    return `${ this.prefix }${ this.itemName }`.toLowerCase();
+    return `${ BaseStorage.prefix }${ this.itemName }`.toLowerCase();
   }
 
   /**
@@ -86,10 +86,9 @@ class BaseStorage<T = any> {
    */
   static clear (webStorage: Storage): void {
     Object.keys(webStorage).forEach(key => {
-      console.log(key, '清除');
-    //   if (key.startsWith(this.prefix)) {
-    //     webStorage.removeItem(key);
-    //   }
+      if (key.startsWith(BaseStorage.prefix)) {
+        webStorage.removeItem(key);
+      }
     });
   }
 }
