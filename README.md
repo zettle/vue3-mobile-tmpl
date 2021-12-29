@@ -392,7 +392,7 @@ console.log(p1.cname, p2.cname);// 都是xiaoming，因为不会再实例化第2
 ```
 
 
-## 待解决问题
+## 遗留问题
 
 ### 1、api的自动导入导出方案
 在 `/src/http/api/*` 里面定义了很多接口，然后在`/src/http/index.ts`做统一导入导出
