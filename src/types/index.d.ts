@@ -6,8 +6,12 @@ declare namespace IAjax {
   }
   // 登录接口返回
   interface ILoginResp {
-    username: string;
-    age: number;
+    userInfo: {
+      username: string;
+      age: string;
+      sex: string;
+    },
+    orders: Array<{id: string; title: string, num: number}>
   }
 }
 export = IAjax
