@@ -10,6 +10,7 @@ declare namespace IAjax {
       username: string;
       age: string;
       sex: string;
+      native: string;
     },
     orders: Array<{id: string; title: string, num: number}>
   }

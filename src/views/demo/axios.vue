@@ -10,7 +10,7 @@
         @click="handleNormal">
         返回数据
       </van-button>
-      {{ model }}
+      {{ model.userInfo.username }}
     </div>
   </app-layout>
 </template>
@@ -20,15 +20,6 @@ import { reactive } from 'vue';
 import { channelRequest } from '@/http/request';
 import { assignWith } from '@/utils/meiObj';
 import IAjax from '@/types';
-
-// interface IModel {
-//   userInfo: {
-//     username: string;
-//     age: string;
-//     sex: string;
-//   },
-//   orders: Array<{id: string; title: string, num: number}>
-// }
 
 const model = reactive({
   userInfo: {
