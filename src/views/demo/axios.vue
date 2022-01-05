@@ -33,6 +33,5 @@ const model = reactive({
 async function handleNormal () {
   const { data } = await channelRequest.post<IAjax.ILoginResp>('login', model);
   assignWith(model, data);
-  console.log('返回数据', model);
 }
 </script>

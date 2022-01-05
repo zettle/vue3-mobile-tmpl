@@ -1,4 +1,4 @@
-import { encryption, decrypt } from '@/utils/cryptoBase64';
+import { encryption, decrypt } from '@/utils';
 
 // storage存的value的格式
 interface IStorageValue<T> {
