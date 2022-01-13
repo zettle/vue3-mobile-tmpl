@@ -67,6 +67,11 @@ const routes: RouteRecordRaw[] = [
         path: 'reg',
         component: () => import('../views/demo/reg.vue'),
         meta: { title: '正则测试' }
+      },
+      {
+        path: 'indexbar',
+        component: () => import('../views/demo/indexbar.vue'),
+        meta: { title: '索引' }
       }
     ]
   }

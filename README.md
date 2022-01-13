@@ -401,3 +401,17 @@ console.log(p1.cname, p2.cname);// 都是xiaoming，因为不会再实例化第2
 
 
 
+## 封装历程
+[x] git提交规范
+[x] 按需加载vant
+[x] vuex改为pinia
+[x] 怎么规范ts和ajax（放弃，改为规范ts+stroage感觉更加适合），ajax就直接写在页面上
+[] eslint+prettier+vscode
+[] 选择个适合移动端的browserslistrc
+[] 改为vite，pc用webpack
+[] keep-alive和路由动画
+[] jest单元测试
+[] axios处理，骨架屏+提交loading，页面切换取消axios
+[] 多语言
+[] 封装个组件，集合loading、no-result进去，同时也支持插槽
+[] 2倍图和3倍图的mixins封装，看看music-play的还有什么可以
