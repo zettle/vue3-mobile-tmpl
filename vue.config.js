@@ -15,7 +15,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/channel_api': {
-        target: 'http://localhost:3000/api',
+        target: 'http://yapi.smart-xwork.cn/mock/128748/vue_api/',
         pathRewrite: { '^/channel_api': '' }
       }
     }

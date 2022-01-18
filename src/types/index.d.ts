@@ -6,13 +6,16 @@ declare namespace IAjax {
   }
   // 登录接口返回
   interface ILoginResp {
-    userInfo: {
-      username: string;
-      age: string;
-      sex: string;
-      native: string;
-    },
-    orders: Array<{id: string; title: string, num: number}>
+    username: string;
+    token: string;
+    uid: string;
+  }
+
+  // 获取登录人信息接口返回
+  interface IGetUserInfoResp {
+    username: string; // 登录账号
+    realname: string; // 中文名
+    province: string; // 省
   }
 }
 export = IAjax

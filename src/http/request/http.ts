@@ -2,6 +2,7 @@ import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
 import RespFail from './respFail';
 import type { IResponse } from './types';
 import { Toast } from 'vant';
+import userInfoStore from '@/stores/userInfo';
 
 class Request {
   instance: AxiosInstance;
@@ -15,8 +16,12 @@ class Request {
     );
   }
 
-  // 公共的请求前拦截
+  // 公共的请求前拦截1-往header.token赋值
   requestInterceptor (config: AxiosRequestConfig): AxiosRequestConfig {
+    console.log('token', userInfoStore.token);
+    if (config.headers && userInfoStore.token) {
+      config.headers.token = userInfoStore.token;
+    }
     return config;
   }
 
@@ -26,7 +31,7 @@ class Request {
     if (data.code === 0) {
       return data;
     } else {
-      Toast.fail(data.message ?? '接口异常');
+      Toast.fail(data.msg ?? '接口异常');
       return Promise.reject(new RespFail(data)); // 加个类型，外层通过这个去判断
     }
   }
