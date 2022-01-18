@@ -104,8 +104,45 @@ module.exports = {
   }
 };
 ```
+其他配置如下:
+```js
+{
+  unitToConvert: 'px', // 默认px，要转化的单位
+  viewportWidth: 750, // 设计稿的UI宽度，让设计师给750px的
+  minPixelValue: 1, // 小于或等于`1px`不转换为视窗单位，你也可以设置为你想要的值
+  unitPrecision: 5, // 转化后小数点精度
+  propList: ['*'], // 指定要转换的css属性单位，*表示所有
+  viewportUnit: 'vw', // 默认vw，指定需要转化成的视窗单位
+  fontViewportUnit: 'vw', // 默认vw，指定字体需要转换成的视窗单位
+  selectorBlackList: ['xxyy'], // 指定不转化的类名，比如vant-*的都不转换
+  mediaQuery: false, // 默认false，是否在媒体查询的css代码中进行转换
+  replace: true, // 是否转换后直接更换属性值
+  exclude: [/node_module/], // 设置忽略文件
+  landscape: false, // 是否处理横屏情况
+  landscapeUnit: 'vw',
+  landscapeWidth: 568
+}
+```
 
-3. 把vant的也转下，不然有些大屏幕下看着vant的和自己的突兀挺大的
+3. 如何兼容vant
+vant的标准是375px，所以兼容vant的方案一是我们也用375px的设计稿
+
+另外一种就是改造`postcss.config.js`，[参考资料](https://www.cnblogs.com/zhangnan35/p/12682925.html)，将其暴露改为一个函数，并在函数里面判断，如果是vant的就用375px做基准（推荐）
+```js
+const path = require('path');
+
+module.exports = ({ webpack }) => {
+  const designWidth = webpack.resourcePath.includes(path.join('node_modules', 'vant')) ? 375 : 750;
+  return {
+    plugins: {
+      'postcss-px-to-viewport': {
+        viewportWidth: designWidth, // 设计稿的UI宽度，让设计师给750px的
+        minPixelValue: 1 // 小于或等于`1px`不转换为视窗单位，你也可以设置为你想要的值
+      }
+    }
+  };
+};
+```
 
 
 ### 方案二：使用rem适配屏幕
