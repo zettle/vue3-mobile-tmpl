@@ -24,7 +24,6 @@ const router = useRouter();
 const pageTitle = (route.meta.title as string) ?? '默认标题';
 
 function handleClickLeft () {
-  console.log('handleClickLeft');
   router.go(-1);
 }
 

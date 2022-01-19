@@ -5,11 +5,14 @@ const path = require('path');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const Components = require('unplugin-vue-components/webpack');
 const { VantResolver } = require('unplugin-vue-components/resolvers');
+const WebpackBar = require('webpackbar');
 /* eslint-enable */
 
 function resolve (dir) {
   return path.join(__dirname, dir); // 原来的cli2是在build里面，这里就不需要回退了
 }
+
+const { VUE_APP_PRONAME } = process.env;
 
 module.exports = {
   devServer: {
@@ -77,9 +80,25 @@ module.exports = {
         })
         .end();
     });
+
+    /********************
+     * 移除prefetch/preload插件（建议保留提高性能）
+     ********************/
+    // config.plugins.delete('prefetch-index');
+    // config.plugins.delete('preload-index');
+
+    /********************
+     *
+     ********************/
+    config.plugin('html').tap(args => {
+      args[0].title = VUE_APP_PRONAME;
+      return args;
+    });
   },
   configureWebpack (config) {
-    // 如果是本地环境，则启动stylelint检查css
+    /********************
+     * 如果是本地环境，则启动stylelint检查css
+     ********************/
     if (process.env.NODE_ENV === 'development') {
       config.plugins.push(new StyleLintPlugin({
         context: 'src',
@@ -90,9 +109,19 @@ module.exports = {
       }));
     }
 
-    // vant的自动按需加载
+    /********************
+     * vant的自动按需加载
+     ********************/
     config.plugins.push(
       Components({ resolvers: [VantResolver()] })
     );
+
+    /********************
+     * webpack进度条（感觉挺影响性能的）
+     ********************/
+    config.plugins.push(new WebpackBar({
+      name: VUE_APP_PRONAME,
+      color: '#07c160'
+    }));
   }
 };
