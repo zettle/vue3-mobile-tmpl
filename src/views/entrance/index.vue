@@ -17,7 +17,8 @@
 <script lang="ts" setup>
 const switchBar = [
   { icon: 'wap-home', name: '首页', url: '/entrance/home' },
-  { icon: 'friends', name: '个人中心', url: '/entrance/mine' }
+  { icon: 'cart', name: '个人中心', url: '/entrance/mine' },
+  { icon: 'manager', name: '其他', url: '/entrance/demo' }
 ];
 </script>
 

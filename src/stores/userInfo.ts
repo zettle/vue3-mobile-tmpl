@@ -20,12 +20,15 @@ const useUserInfoStore = defineStore('userInfo', function () {
 });
 
 // 持久化
-const instance = useUserInfoStore();
-const userInfoStorage = defineSessionStorage<typeof instance.$state>(instance.$id);
-instance.$subscribe((_, state) => {
-  userInfoStorage.set(state);
-});
-const storageResult = userInfoStorage.get();
-storageResult && instance.$patch({ ...storageResult });
+export function initUserInfoStore (): void {
+  const instance = useUserInfoStore();
+  const userInfoStorage = defineSessionStorage<typeof instance.$state>(instance.$id);
+  instance.$subscribe((_, state) => {
+    userInfoStorage.set(state);
+  });
+  const storageResult = userInfoStorage.get();
+  console.log('storageResult', storageResult);
+  storageResult && instance.$patch({ ...storageResult });
+}
 
-export default instance;
+export default useUserInfoStore;

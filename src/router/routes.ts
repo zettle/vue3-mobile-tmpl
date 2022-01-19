@@ -25,8 +25,7 @@ const routes: RouteRecordRaw[] = [
         name: 'EntranceHome',
         component: () => import('../views/entrance/home.vue'),
         meta: {
-          title: '首页',
-          unRequireLogin: true
+          title: '首页'
         }
       },
       {
@@ -35,7 +34,16 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../views/entrance/mine.vue'),
         meta: {
           title: '个人中心',
-          roles: ['admin', 'customer']
+          roles: ['admin', 'customer'],
+          requireLogin: true
+        }
+      },
+      {
+        path: 'demo',
+        name: 'EntranceDemo',
+        component: () => import('../views/entrance/demo.vue'),
+        meta: {
+          title: '其他'
         }
       }
     ]

@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
 import RespFail from './respFail';
 import type { IResponse } from './types';
 import { Toast } from 'vant';
-import userInfoStore from '@/stores/userInfo';
+import useUserInfo from '@/stores/userInfo';
 
 class Request {
   instance: AxiosInstance;
@@ -18,7 +18,7 @@ class Request {
 
   // 公共的请求前拦截1-往header.token赋值
   requestInterceptor (config: AxiosRequestConfig): AxiosRequestConfig {
-    console.log('token', userInfoStore.token);
+    const userInfoStore = useUserInfo();
     if (config.headers && userInfoStore.token) {
       config.headers.token = userInfoStore.token;
     }
