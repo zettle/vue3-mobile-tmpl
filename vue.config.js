@@ -12,8 +12,6 @@ function resolve (dir) {
   return path.join(__dirname, dir); // 原来的cli2是在build里面，这里就不需要回退了
 }
 
-const { VUE_APP_PRONAME } = process.env;
-
 module.exports = {
   devServer: {
     proxy: {
@@ -88,10 +86,10 @@ module.exports = {
     // config.plugins.delete('preload-index');
 
     /********************
-     *
+     * ejs输出变量
      ********************/
     config.plugin('html').tap(args => {
-      args[0].title = VUE_APP_PRONAME;
+      args[0].title = '我的模板';
       return args;
     });
   },
@@ -120,7 +118,7 @@ module.exports = {
      * webpack进度条（感觉挺影响性能的）
      ********************/
     config.plugins.push(new WebpackBar({
-      name: VUE_APP_PRONAME,
+      name: '项目模板',
       color: '#07c160'
     }));
   }

@@ -1,6 +1,7 @@
-import { ref } from 'vue';
+import { Ref, ref } from 'vue';
 import { defineStore } from 'pinia';
 import { defineSessionStorage } from '@/storage';
+import IAjax from '@/types';
 
 const useUserInfoStore = defineStore('userInfo', function () {
   // 登录token
@@ -8,14 +9,35 @@ const useUserInfoStore = defineStore('userInfo', function () {
   function setToken (ken: string) {
     token.value = ken;
   }
-  function removeToken () {
+  function clearToken () {
     token.value = '';
+  }
+
+  // 用户角色
+  const roles: Ref<string[]> = ref([]);
+  function setRoles (roleArr: string[]) {
+    roles.value = roleArr;
+  }
+  function clearRoles () {
+    roles.value = [];
+  }
+
+  // 登录后处理用户数据
+  function doLogin (user: IAjax.ILoginResp) {
+    setToken(user.token);
+    setRoles(user.roles);
+  }
+  // 退出后处理用户数据
+  function doLogout () {
+    clearToken();
+    clearRoles();
   }
 
   return {
     token,
-    setToken,
-    removeToken
+    roles,
+    doLogin,
+    doLogout
   };
 });
 

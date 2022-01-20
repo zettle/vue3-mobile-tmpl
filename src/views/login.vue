@@ -46,10 +46,14 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { Toast } from 'vant';
 import { channelRequest } from '@/http/request';
-import userInfoStore from '@/stores/userInfo';
+import useUserInfoStore from '@/stores/userInfo';
 import IAjax from '@/types';
+
+const userInfoStore = useUserInfoStore();
+const router = useRouter();
 
 const model = reactive({
   username: 'admin',
@@ -67,8 +71,9 @@ const isLoading = ref(false);
 async function hanleSubmit () {
   isLoading.value = true;
   const resp = await channelRequest.post<IAjax.ILoginResp>('login', model).finally(() => { isLoading.value = false; });
-  userInfoStore.setToken(resp.data.token);
+  userInfoStore.doLogin(resp.data);
   Toast('登录成功');
+  router.replace({ name: 'EntranceMine' });
 }
 
 /**
@@ -83,6 +88,6 @@ async function getUserInfo () {
  * 退出
  */
 async function onLogout () {
-  userInfoStore.removeToken();
+  userInfoStore.doLogout();
 }
 </script>

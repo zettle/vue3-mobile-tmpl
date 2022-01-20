@@ -11,5 +11,4 @@ app.use(router);
 app.use(createPinia());
 app.use(regGlobal); // 注册全局组件、过滤器
 app.mount('#app');
-console.log(2);
 initUserInfoStore();

@@ -1,6 +1,6 @@
 import encBase64 from 'crypto-js/enc-base64';
 import encUtf8 from 'crypto-js/enc-utf8';
-const isEncryption = true; // 是否要加密
+const isEncryption = false; // 是否要加密
 
 // 加密
 export function encryption (str: string): string {

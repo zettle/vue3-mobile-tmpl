@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import routes from './routes';
-import { nprogress } from '@/utils';
+import { nprogress, setDocTitle } from '@/utils';
 import { IMeta } from './types';
-import { setDocTitle, validLogin } from './middleware';
+import useUserInfoStore from '@/stores/userInfo';
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -12,17 +12,29 @@ const router = createRouter({
   }
 });
 
-// 做路由拦截，比如判断是否登录之类
-router.beforeEach((to, from, next) => {
+// 拦截1：一些简单的
+router.beforeEach((to) => {
   nprogress.start(); // 设置进度条
   setDocTitle((to.meta as IMeta).title); // 设置标题
-
-  if (!validLogin(to, from, next)) { // 判断需要登录的页面是否需要登录
-    return false;
+});
+// 拦截2：需要登录访问的页面，校验下登录
+router.beforeEach((to) => {
+  const { requireLogin } = to.meta as IMeta;
+  const userInfoStore = useUserInfoStore();
+  if (requireLogin && !userInfoStore.token) {
+    return { name: 'Login' }; // 这是一种replace
   }
-
-  console.log('不应该来这列');
-  next();
+});
+// 拦截3：需要权限访问的页面，校验下是否与对应权限
+router.beforeEach((to) => {
+  const { roles: userRoles } = useUserInfoStore();
+  const { roles: routeRoles } = to.meta as IMeta;
+  if (routeRoles) {
+    const isPower = userRoles.some(userRole => routeRoles.includes(userRole));
+    if (!isPower) {
+      return { name: 'Error403' };
+    }
+  }
 });
 
 router.afterEach(() => {

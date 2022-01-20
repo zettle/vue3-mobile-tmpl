@@ -343,7 +343,7 @@ if (process.env.NODE_ENV === 'development') {
 
 
 ## 8、axios的封装
-axios的封装
+axios的封装以及api的模块化
 
 
 ## 9、storage
@@ -361,6 +361,53 @@ const storage = new SessionStorage<Itype>();
 storage.set({ name:'xxx', age:23 });
 storage.get(); // 自动推导类型
 ```
+
+## 10、route的模块化
+在`/src/router/routes/*`里面，按照页面模块化命名，最终再导出
+
+## 11、pinia的探索
+### 11.1 确保`useUserInfoStore()`是在`createPinia()`之后才执行
+使用pinia最常遇到的问题：`getActivePinia was called with no active Pinia. Did you forget to install pinia?`
+
+![](./readme/pinia-error.png)
+
+这个是因为我们有个地方的`useUserInfoStore()`调用比`app.use(createPinia())`早了，pinia的实例还没挂载上
+
+比如在`/src/stores/userInfo.ts`里面，我们直接通过
+```ts
+const useUserInfoStore = defineStore('userInfo', function () {
+  const token = ref(''); // 登录token
+  function setToken (ken: string) {
+    token.value = ken;
+  }
+  function clearToken () {
+    token.value = '';
+  }
+  return { token, setToken, clearToken };
+});
+
+// 持久化
+export function initUserInfoStore (): void {
+  const instance = useUserInfoStore();
+  const userInfoStorage = defineSessionStorage<typeof instance.$state>(instance.$id);
+  instance.$subscribe((_, state) => { userInfoStorage.set(state); });
+  const storageResult = userInfoStorage.get();
+  storageResult && instance.$patch({ ...storageResult });
+}
+```
+上面的，在一般组件中中使用没有什么问题，但是如果在`main.js或App.vue`引入，就会遇到这个报错，本质原因
+
+[官网也有对此的介绍](https://pinia.vuejs.org/core-concepts/outside-component-usage.html#single-page-applications)
+
+
+### 11.2 pinia的写法
+pinia同样支持`OptionApi/ComponsitionApi`的写法
+
+个人觉得每个pinia模块都应该保持相对的小，OptionApi会更适合
+
+### 11.3 pinia的持久化（待研究）
+#### 方案一: 
+
 
 
 
@@ -444,12 +491,27 @@ module.exports = {
 挑选合适的browserslistrc，就和[vant](https://vant-contrib.gitee.io/vant/#/zh-CN/home)保持一致即可，而vant保持和vue3一致
 
 
+### 9、关于404界面
+当用户访问不存在的链接，我们需要展示一个404页面，在以往我们使用下面写法
+```ts
+{
+  path: '/:pathMatch(.*)', // 配置404
+  redirect: '/error/404' // 不推荐redirect，会url重定向，但
+}
+```
+但有点不好的，就是url会发生重定向，我们往往希望在url保留着那个404的地址，只是界面展示not found界面，所以需要改为下面的写法
+```ts
+{
+  path: '/:pathMatch(.*)', // 配置404
+  component: () => import('@/views/error/404.vue')
+}
+```
+
+
 ## 外链
 * [vant](https://vant-contrib.gitee.io/vant/v3/#/zh-CN)
 * [pinia](https://pinia.esm.dev/introduction.html)
 * [vueRouter滚动行为](https://next.router.vuejs.org/zh/guide/advanced/scroll-behavior.html)
-
-
 
 
 ## 以后可能会用到的

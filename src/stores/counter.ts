@@ -2,7 +2,7 @@ import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import { defineSessionStorage } from '@/storage';
 
-// option的写法
+// optionApi的写法
 // const useCounterStore = defineStore('counter', {
 //   state: () => ({
 //     count: 0,

@@ -9,6 +9,7 @@ declare namespace IAjax {
     username: string;
     token: string;
     uid: string;
+    roles: string[];
   }
 
   // 获取登录人信息接口返回
