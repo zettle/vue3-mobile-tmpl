@@ -50,17 +50,18 @@
 </template>
 
 <script lang="ts" setup>
-import { userCountStorage, SessionStorage } from '@/storage';
+import { useCountSessionStorage, SessionStorage } from '@/storage';
 
+const countSession = useCountSessionStorage();
 // 普通存储的 存删查
 function handleSave () {
-  userCountStorage.set({ name: 'xiaoming', age: 23 });
+  countSession.set({ name: 'xiaoming', age: 23 });
 }
 function handleTake () {
-  console.log(userCountStorage.get());
+  console.log(countSession.get());
 }
 function handleDel () {
-  userCountStorage.remove();
+  countSession.remove();
 }
 function handleClear () {
   SessionStorage.clear();
@@ -68,9 +69,9 @@ function handleClear () {
 
 // 过期时间的存储
 function handleSaveExpire () {
-  userCountStorage.set({ name: 'xiaoming', age: 23 }, 1000);
+  countSession.set({ name: 'xiaoming', age: 23 }, 1000);
 }
 function handleTakeExpire () {
-  console.log(userCountStorage.get());
+  console.log(countSession.get());
 }
 </script>

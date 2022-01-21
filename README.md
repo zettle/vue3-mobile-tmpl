@@ -145,6 +145,22 @@ module.exports = ({ webpack }) => {
 ```
 
 
+3. 如何兼容nprogress
+nprogress想要用本来的样式，vant以375的标准，我们自己的样式用750的标准
+
+所以方案如下:
+```js
+return {
+  plugins: {
+    'postcss-px-to-viewport': {
+      viewportWidth: designWidth, // 设计稿的UI宽度，让设计师给750px的
+      minPixelValue: 1, // 小于或等于`1px`不转换为视窗单位，你也可以设置为你想要的值
+      exclude: [/nprogress/] // nprogress.css的就不转换了，用其原来的
+    }
+  }
+}
+```
+
 ### 方案二：使用rem适配屏幕
 优点：能控制大屏的最大宽度。因为vh布局有个不太好的地方就是不能实现这种效果: 让整个body控制在一个最大宽度，并且里面所有元素跟着整个比例
 
@@ -554,10 +570,12 @@ console.log(p1.cname, p2.cname);// 都是xiaoming，因为不会再实例化第2
 [x] 怎么规范ts和ajax（放弃，改为规范ts+stroage感觉更加适合），ajax就直接写在页面上
 [ ] eslint+prettier+vscode
 [x] 选择个适合移动端的browserslistrc
-[ ] 改为vite，pc用webpack
 [ ] keep-alive和路由动画
-[ ] jest单元测试
 [ ] axios处理，骨架屏+提交loading，页面切换取消axios
+[ ] cordova和wxjdk的封装
+[ ] 改为vite，pc用webpack
+[ ] jest单元测试
 [ ] 多语言
 [ ] 封装个组件，集合loading、no-result进去，同时也支持插槽
-[ ] 2倍图和3倍图的mixins封装
+[x] 2倍图和3倍图的mixins封装
+
