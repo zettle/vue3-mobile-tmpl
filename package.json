@@ -17,7 +17,7 @@
     "prepare": "husky install",
     "precommit": "git add .",
     "commit": "cz",
-    "postcommit": "git push"
+    "postcommit": "git push origin v1-basewebpack"
   },
   "dependencies": {
     "axios": "^0.22.0",

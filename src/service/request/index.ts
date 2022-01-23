@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
-import RespFail from './respFail';
+import RespFailClass from './RespFailClass';
 import type { IResponse } from './types';
 import { Toast } from 'vant';
 import useUserInfo from '@/stores/userInfo';
@@ -32,7 +32,7 @@ class Request {
       return data;
     } else {
       Toast.fail(data.msg ?? '接口异常');
-      return Promise.reject(new RespFail(data)); // 加个类型，外层通过这个去判断
+      return Promise.reject(new RespFailClass(data)); // 加个类型，外层通过这个去判断
     }
   }
 
@@ -74,4 +74,4 @@ class Request {
   }
 }
 
-export default Request;
+export default new Request({ baseURL: '/channel_api' });

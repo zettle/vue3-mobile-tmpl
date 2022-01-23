@@ -48,9 +48,8 @@
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { Toast } from 'vant';
-import { channelRequest } from '@/http/request';
+import { fetchLogin } from '@/service';
 import useUserInfoStore from '@/stores/userInfo';
-import IAjax from '@/types';
 
 const userInfoStore = useUserInfoStore();
 const router = useRouter();
@@ -70,7 +69,7 @@ const rules = {
 const isLoading = ref(false);
 async function hanleSubmit () {
   isLoading.value = true;
-  const resp = await channelRequest.post<IAjax.ILoginResp>('login', model).finally(() => { isLoading.value = false; });
+  const resp = await fetchLogin(model).finally(() => { isLoading.value = false; });
   userInfoStore.doLogin(resp.data);
   Toast('登录成功');
   router.replace({ name: 'EntranceMine' });
@@ -80,8 +79,7 @@ async function hanleSubmit () {
  * 获取登录人信息
  */
 async function getUserInfo () {
-  const { data } = await channelRequest.get<IAjax.IGetUserInfoResp>('getLoginInfo');
-  console.log('登录信息：', data);
+  console.log('登录信息：');
 }
 
 /**

@@ -1,7 +1,7 @@
 import { Ref, ref } from 'vue';
 import { defineStore } from 'pinia';
 import { defineSessionStorage } from '@/storage';
-import IAjax from '@/types';
+import { ILoginResp } from '@/service';
 
 const useUserInfoStore = defineStore('userInfo', function () {
   // 登录token
@@ -23,7 +23,7 @@ const useUserInfoStore = defineStore('userInfo', function () {
   }
 
   // 登录后处理用户数据
-  function doLogin (user: IAjax.ILoginResp) {
+  function doLogin (user: ILoginResp) {
     setToken(user.token);
     setRoles(user.roles);
   }
