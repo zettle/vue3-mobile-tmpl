@@ -1,5 +1,9 @@
 # vue3搭建移动端应用
 
+项目一开始是vue-cli创建，基于webpack
+
+后面改为基于create-vue创建，基于vite
+
 升级包
 ```shell
 # 更新vue全家桶
@@ -578,4 +582,4 @@ console.log(p1.cname, p2.cname);// 都是xiaoming，因为不会再实例化第2
 [ ] 多语言
 [ ] 封装个组件，集合loading、no-result进去，同时也支持插槽
 [x] 2倍图和3倍图的mixins封装
-
+[ ] 提交按钮处理loading状态的封装
