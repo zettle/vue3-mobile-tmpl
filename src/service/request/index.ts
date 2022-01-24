@@ -3,21 +3,23 @@ import RespFailClass from './RespFailClass';
 import type { IResponse } from './types';
 import { Toast } from 'vant';
 import useUserInfo from '@/stores/userInfo';
-
+import generUrlKey from './generUrlKey';
+import cancelContainer from './cancelContainer';
 class Request {
   instance: AxiosInstance;
   constructor (config: AxiosRequestConfig = {}) {
     this.instance = axios.create(config);
 
-    this.instance.interceptors.request.use(this.requestInterceptor);
-    this.instance.interceptors.response.use(
-      this.responseInterceptor,
-      this.responseInterceptorCatch
-    );
+    // 请求前的拦截器，要注意靠后的拦截器是先执行
+    this.instance.interceptors.request.use(this.reqIntpToken);
+    this.instance.interceptors.request.use(this.reqIntpUrlKey);
+    // 请求后的拦截器，要注意靠前的拦截器是先执行
+    this.instance.interceptors.response.use(this.resIntpCancel, this.resIntpCatchCancel);
+    this.instance.interceptors.response.use(this.resIntp, this.resIntpCatch);
   }
 
   // 公共的请求前拦截1-往header.token赋值
-  requestInterceptor (config: AxiosRequestConfig): AxiosRequestConfig {
+  reqIntpToken (config: AxiosRequestConfig): AxiosRequestConfig {
     const userInfoStore = useUserInfo();
     if (config.headers && userInfoStore.token) {
       config.headers.token = userInfoStore.token;
@@ -25,8 +27,34 @@ class Request {
     return config;
   }
 
+  /**
+   * 公共的请求前拦截2
+   * 1. 给url query加唯一值 linkmonid 作为全链路监控的id
+   * 2. 用上面的linkmonid作为key，生成取消axios的数组
+   */
+  reqIntpUrlKey (config: AxiosRequestConfig): AxiosRequestConfig {
+    if (!config.params) {
+      config.params = {};
+    }
+    config.params.linkmonid = generUrlKey();
+    config.cancelToken = cancelContainer.add(config);
+    return config;
+  }
+
+  // 请求后的拦截器1 成功：删除关闭函数
+  resIntpCancel (response: AxiosResponse<IResponse>) {
+    cancelContainer.remove(response.config); // 移除取消函数
+    return response;
+  }
+
+  // 请求后的拦截器1 异常：删除关闭函数
+  resIntpCatchCancel (error: any): any {
+    cancelContainer.remove(error.config);
+    return Promise.reject(error); // 这一定要返回reject，不然会进入下一个拦截器的resolve
+  }
+
   // 公共的请求后拦截
-  responseInterceptor (response: AxiosResponse<IResponse>): any {
+  resIntp (response: AxiosResponse<IResponse>): any {
     const { data } = response;
     if (data.code === 0) {
       return data;
@@ -37,9 +65,10 @@ class Request {
   }
 
   // 公共的请求拦截，网络异常 404之类
-  responseInterceptorCatch (error: any): Promise<any> {
+  resIntpCatch (error: any): Promise<any> {
     const { response, code, message } = error || {};
-    console.log('error', response, code, message);
+    console.log('error', { response, code, message });
+    Toast.fail(`http状态: ${ response.status }`);
     return Promise.reject(error);
     // return new Promise(() => { /* empty */ }); // 这样外面就不会进入resolve或reject，但感觉这样不太好
   }

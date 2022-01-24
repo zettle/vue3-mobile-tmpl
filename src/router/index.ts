@@ -3,6 +3,7 @@ import routes from './routes';
 import { nprogress, setDocTitle } from '@/utils';
 import { IMeta } from './types';
 import useUserInfoStore from '@/stores/userInfo';
+import { cancelContainer } from '@/service';
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -16,6 +17,7 @@ const router = createRouter({
 router.beforeEach((to) => {
   nprogress.start(); // 设置进度条
   setDocTitle((to.meta as IMeta).title); // 设置标题
+  cancelContainer.clear();
 });
 // 拦截2：需要登录访问的页面，校验下登录
 router.beforeEach((to) => {
