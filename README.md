@@ -73,11 +73,17 @@ module.exports = {
 
 2. 修改`vue.config.js`，内容如下:
 ```js
+const AutoImport = require('unplugin-auto-import/webpack');
 const Components = require('unplugin-vue-components/webpack');
 const { VantResolver } = require('unplugin-vue-components/resolvers');
 
 module.exports = {
   configureWebpack (config) {
+    config.plugins.push(
+      AutoImport({
+        resolvers: [VantResolver()]
+      })
+    );
     config.plugins.push(
       Components({ resolvers: [VantResolver()] })
     );

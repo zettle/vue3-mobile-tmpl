@@ -14,8 +14,7 @@ class Request {
     this.instance.interceptors.request.use(this.reqIntpToken);
     this.instance.interceptors.request.use(this.reqIntpUrlKey);
     // 请求后的拦截器，要注意靠前的拦截器是先执行
-    this.instance.interceptors.response.use(this.resIntpCancel, this.resIntpCatchCancel);
-    this.instance.interceptors.response.use(this.resIntp, this.resIntpCatch);
+    this.instance.interceptors.response.use(this.respIntp, this.respIntpCatch);
   }
 
   // 公共的请求前拦截1-往header.token赋值
@@ -42,19 +41,25 @@ class Request {
   }
 
   // 请求后的拦截器1 成功：删除关闭函数
-  resIntpCancel (response: AxiosResponse<IResponse>) {
-    cancelContainer.remove(response.config); // 移除取消函数
-    return response;
-  }
+  // resIntpCancel (response: AxiosResponse<IResponse>) {
+  //   cancelContainer.remove(response.config); // 移除取消函数
+  //   return response;
+  // }
 
   // 请求后的拦截器1 异常：删除关闭函数
-  resIntpCatchCancel (error: any): any {
-    cancelContainer.remove(error.config);
-    return Promise.reject(error); // 这一定要返回reject，不然会进入下一个拦截器的resolve
-  }
+  // resIntpCatchCancel (error: any): any {
+  //   console.log('axios.isCancel(error)', error);
+  //   if (axios.isCancel(error)) {
+  //     console.log('用户取消了');
+  //     return Promise.reject(new Error('取消了请求'));
+  //   } else {
+  //     cancelContainer.remove(error.config);
+  //     return Promise.reject(error); // 这一定要返回reject，不然会进入下一个拦截器的resolve
+  //   }
+  // }
 
   // 公共的请求后拦截
-  resIntp (response: AxiosResponse<IResponse>): any {
+  respIntp (response: AxiosResponse<IResponse>): any {
     const { data } = response;
     if (data.code === 0) {
       return data;
@@ -64,11 +69,19 @@ class Request {
     }
   }
 
-  // 公共的请求拦截，网络异常 404之类
-  resIntpCatch (error: any): Promise<any> {
-    const { response, code, message } = error || {};
-    console.log('error', { response, code, message });
-    Toast.fail(`http状态: ${ response.status }`);
+  /**
+   * 公共的请求拦截，网络异常 404之类
+   * 1. 判断是不是取消的，不是的话将 cacelContainer容器 里面的取消掉
+   * 2.
+   */
+  respIntpCatch (error: any): Promise<any> {
+    const status = error.response?.status ?? '';
+    const response = error.response || {};
+
+    if (!axios.isCancel(error)) {
+      cancelContainer.remove(error.response?.config);
+    }
+    status && Toast.fail(`http状态: ${ response.status }`);
     return Promise.reject(error);
     // return new Promise(() => { /* empty */ }); // 这样外面就不会进入resolve或reject，但感觉这样不太好
   }

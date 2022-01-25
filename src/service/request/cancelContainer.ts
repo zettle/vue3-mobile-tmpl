@@ -31,6 +31,7 @@ class CancelContainer {
     this.cancelMap.forEach(canceler => {
       canceler();
     });
+    this.cancelMap.clear();
   }
 }
 export default new CancelContainer();

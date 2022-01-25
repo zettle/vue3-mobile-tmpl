@@ -2,6 +2,7 @@
 const path = require('path');
 // const { merge } = require('webpack-merge');
 // const tsImportPluginFactory = require('ts-import-plugin');
+const AutoImport = require('unplugin-auto-import/webpack');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const Components = require('unplugin-vue-components/webpack');
 const { VantResolver } = require('unplugin-vue-components/resolvers');
@@ -110,6 +111,13 @@ module.exports = {
     /********************
      * vant的自动按需加载
      ********************/
+    config.plugins.push(
+      AutoImport({
+        imports: ['vue'], // vue-router/vue的自动引入，不用每次都去import
+        resolvers: [VantResolver()],
+        dts: 'src/types/auto-imports.d.ts' // 设置为true就会在根目录下生成，我们还是将其放在types文件夹里好一点
+      })
+    );
     config.plugins.push(
       Components({ resolvers: [VantResolver()] })
     );

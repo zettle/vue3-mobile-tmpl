@@ -45,7 +45,6 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { Toast } from 'vant';
 import { fetchLogin } from '@/service';
