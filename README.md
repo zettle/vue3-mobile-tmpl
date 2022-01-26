@@ -45,7 +45,7 @@ export default defineConfig({
 });
 ```
 
-修改`tsconfig.json`，把生成的声明文件引入
+3. 修改`tsconfig.json`，把生成的声明文件引入
 
 ```json
 {
@@ -53,13 +53,9 @@ export default defineConfig({
 }
 ```
 
-vue 的 Api 自动引入后，eslint 还是不认识，会提示`ref is undefined`，处理如下:
+4. vue 的 Api 自动引入后，eslint 还是不认识，会提示`ref is undefined`，处理如下:
 
-安装
-
-```shell
-pnpm i -D vue-global-api
-```
+安装: `pnpm i -D vue-global-api`
 
 修改`.eslintrc.cjs`，如下:
 
@@ -67,4 +63,38 @@ pnpm i -D vue-global-api
 module.exports = {
   extends: ['vue-global-api'],
 };
+```
+
+5. 对于 vant 里面一些服务式 api，比如 Toast，我们使用的时候还是需要手动 import 和引入样式，我们可以用下面的方式自动引入样式
+
+安装: `pnpm i -D vite-plugin-style-import`
+
+修改配置:
+
+```ts
+import styleImport, { VantResolve } from 'vite-plugin-style-import';
+export default defineConfig({
+  plugins: [
+    styleImport({
+      resolves: [VantResolve()],
+      libs: [
+        {
+          libraryName: 'vant',
+          esModule: true,
+          resolveStyle: (name) => {
+            return `vant/es/${name}/style/index`;
+          },
+        },
+      ],
+    }),
+  ],
+});
+```
+
+配置后，我们就可以直接用下面的写法
+
+```ts
+import { Toast } from 'vant';
+// import 'vant/es/toast/style/index'; // 这个可以省略了
+Toast('提示内容');
 ```

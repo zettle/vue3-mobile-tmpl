@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Toast } from 'vant';
+
 const count = ref(0);
 
 function onChange() {

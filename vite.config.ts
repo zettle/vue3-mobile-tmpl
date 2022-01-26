@@ -3,6 +3,7 @@ import { fileURLToPath, URL } from 'url';
 import AutoImport from 'unplugin-auto-import/vite';
 import ViteComponents from 'unplugin-vue-components/vite';
 import { VantResolver } from 'unplugin-vue-components/resolvers';
+import styleImport, { VantResolve } from 'vite-plugin-style-import';
 
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -35,6 +36,21 @@ export default defineConfig({
       extensions: ['vue'], // 自定义组件的后缀
       // dts: trie, // 默认true，搜索子目录
       resolvers: [VantResolver()],
+      // directoryAsNamespace: false, // 允许子目录作为组件的命名空间前缀
+    }),
+
+    styleImport({
+      resolves: [ VantResolve() ],
+      // 自定义规则
+      libs: [
+        {
+          libraryName: 'vant',
+          esModule: true,
+          resolveStyle: (name) => {
+            return `vant/es/${name}/style/index`;
+          },
+        },
+      ],
     }),
   ],
 });
