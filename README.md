@@ -98,3 +98,14 @@ import { Toast } from 'vant';
 // import 'vant/es/toast/style/index'; // 这个可以省略了
 Toast('提示内容');
 ```
+
+## 2、commit 之前语法检查和 commit 信息规范
+
+1. 执行 `npx husky-init '&&' pnpm install`，会生成一个`.husky`文件夹
+
+2. 修改`.husky/pre-commit`的内容，加上下面
+
+```
+npm test # 单元测试
+npm run lint # eslint检查
+```

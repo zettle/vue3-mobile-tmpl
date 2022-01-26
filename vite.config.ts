@@ -13,7 +13,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 export default defineConfig({
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
   plugins: [
@@ -40,7 +40,7 @@ export default defineConfig({
     }),
 
     styleImport({
-      resolves: [ VantResolve() ],
+      resolves: [VantResolve()],
       // 自定义规则
       libs: [
         {

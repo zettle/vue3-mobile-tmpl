@@ -12,7 +12,6 @@ declare module 'vue' {
     IconSupport: typeof import('./../components/icons/IconSupport.vue')['default']
     IconTooling: typeof import('./../components/icons/IconTooling.vue')['default']
     TheWelcome: typeof import('./../components/TheWelcome.vue')['default']
-    VanButton: typeof import('vant/es')['Button']
     WelcomeItem: typeof import('./../components/WelcomeItem.vue')['default']
   }
 }
