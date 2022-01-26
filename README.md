@@ -5,7 +5,7 @@
 安装下 vue 全家桶和必要的包
 
 ```shell
-pnpm i vue@next vue-router@next pinia vant@next
+npm i vue@next vue-router@next pinia vant@next
 ```
 
 ## 1、自动引入
@@ -55,7 +55,7 @@ export default defineConfig({
 
 4. vue 的 Api 自动引入后，eslint 还是不认识，会提示`ref is undefined`，处理如下:
 
-安装: `pnpm i -D vue-global-api`
+安装: `npm i -D vue-global-api`
 
 修改`.eslintrc.cjs`，如下:
 
@@ -67,7 +67,7 @@ module.exports = {
 
 5. 对于 vant 里面一些服务式 api，比如 Toast，我们使用的时候还是需要手动 import 和引入样式，我们可以用下面的方式自动引入样式
 
-安装: `pnpm i -D vite-plugin-style-import`
+安装: `npm i -D vite-plugin-style-import`
 
 修改配置:
 
@@ -101,11 +101,27 @@ Toast('提示内容');
 
 ## 2、commit 之前语法检查和 commit 信息规范
 
-1. 执行 `npx husky-init '&&' pnpm install`，会生成一个`.husky`文件夹
+1. 执行 `npx husky-init '&&' npm install`，会生成一个`.husky`文件夹
 
-2. 修改`.husky/pre-commit`的内容，加上下面
+2. 修改`.husky/pre-commit`的内容，加上下面，这样在执行`git commit`的时候就会执行里面的命令
 
 ```
 npm test # 单元测试
 npm run lint # eslint检查
 ```
+
+3. 安装`npm i -D commitizen`，并执行`npx commitizen init cz-conventional-changelog --save-dev --save-exact`
+
+4. 修改`package.json`添加命令
+
+```json
+{
+  "scripts": {
+    "precommit": "git add .",
+    "commit": "npx cz",
+    "postcommit": "git push"
+  }
+}
+```
+
+5. 安装`npm i -D @commitlint/config-conventional @commitlint/cli`

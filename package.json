@@ -8,7 +8,10 @@
     "test": "vitest --environment jsdom",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "precommit": "git add .",
+    "commit": "npx cz",
+    "postcommit": "git push"
   },
   "dependencies": {
     "axios": "^0.25.0",
@@ -18,6 +21,8 @@
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.1.0",
+    "@commitlint/config-conventional": "^16.0.0",
     "@rushstack/eslint-patch": "^1.1.0",
     "@types/node": "^16.11.21",
     "@vitejs/plugin-vue": "^2.0.1",
@@ -25,8 +30,10 @@
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/eslint-config-typescript": "^10.0.0",
     "@vue/test-utils": "^2.0.0-rc.18",
+    "commitizen": "^4.2.4",
     "eslint": "^8.5.0",
     "eslint-plugin-vue": "^8.2.0",
+    "husky": "^7.0.0",
     "jsdom": "^19.0.0",
     "prettier": "^2.5.1",
     "typescript": "~4.5.4",
@@ -36,7 +43,6 @@
     "vite-plugin-style-import": "^1.4.1",
     "vitest": "^0.1.23",
     "vue-global-api": "^0.4.1",
-    "vue-tsc": "^0.29.8",
-    "husky": "^7.0.0"
+    "vue-tsc": "^0.29.8"
   }
 }
