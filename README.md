@@ -124,4 +124,12 @@ npm run lint # eslint检查
 }
 ```
 
-5. 安装`npm i -D @commitlint/config-conventional @commitlint/cli`
+5. 安装`npm i -D @commitlint/config-conventional @commitlint/cli`，并执行`node node_modules/husky/lib/bin.js add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'`
+
+6. 新建`commitlint.config.js`，内容如下:
+
+```js
+module.exports = {
+  extends: ['@commitlint/config-conventional'],
+};
+```
