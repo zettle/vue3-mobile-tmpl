@@ -133,3 +133,107 @@ module.exports = {
   extends: ['@commitlint/config-conventional'],
 };
 ```
+
+
+## 3、mock数据
+安装: `npm i vite-plugin-mock mockjs -D`，[相关文档](https://github.com/vbenjs/vite-plugin-mock/blob/main/README.zh_CN.md)
+
+修改`vite.config.ts`如下:
+```ts
+import { UserConfigExport, ConfigEnv } from 'vite'
+import { viteMockServe } from 'vite-plugin-mock'
+export default ({ command }: ConfigEnv): UserConfigExport => {
+  return {
+    plugins: [
+      viteMockServe({
+        mockPath: 'mock', // mock的目录
+        localEnabled: command === 'serve', // 当执行`vite serve`说明启动本地，用mock数据，其他就不用mock数据
+      }),
+    ],
+  }
+}
+```
+在根目录新建`/mock/index.ts`，造各种数据，如下:
+```ts
+import { MockMethod } from 'vite-plugin-mock';
+import { Random } from 'mockjs';
+export default [
+  {
+    url: '/api/get',
+    method: 'get',
+    response: ({ query }) => {
+      return {
+        code: 0,
+        data: {
+          name: Random.cname(),
+        },
+      };
+    },
+  },
+] as MockMethod[];
+```
+
+在项目中就可以直接用了，如下:
+```ts
+import axios from 'axios';
+await axios.post('/api/post');
+```
+
+
+## 4、多环境配置
+和以前的vue-cli一样，支持引用方式改为了`import.meta.env.xxx`
+比如现在多弄个环境变量: `VITE_APP_ENV=local`
+
+那么引入的时候，就写成: `import.meta.env.VITE_APP_ENV`
+
+同时，我们`/src/types/env.d.ts`为我们定义的写好ts类型
+```ts
+/// <reference types="vite/client" />
+
+interface ImportMetaEnv {
+  readonly VITE_APP_ENV: string;
+  // 更多环境变量...
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+```
+这样就有了很好的提示
+
+
+## 打包的优化
+### 按文件类型分文件
+vite打包后，默认是把所有静态资源`js/css/png`等都放在`/dist/assets`里面，挺不方便我们看的
+
+![](./doc/assets.png)
+
+我们还是希望按照以前的方式分开存放，则修改配合如下:
+```ts
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        chunkFileNames: 'js/[name]-[hash].js',
+        entryFileNames: 'js/[name]-[hash].js',
+        assetFileNames: '[ext]/[name]-[hash].[ext]',
+      },
+    },
+  }
+});
+```
+再执行打包，可以看文件分开存放了
+
+![](./img/assets-2.png)
+
+## 部署
+修改 `vite.config.ts` 的 `base` 配置，相当于我们以前的`publicPath`
+
+修改后，因为我们使用的history模式，所以需要修改`/src/router/index.ts`，内容如下:
+```ts
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes,
+});
+```
+`import.meta.env.BASE_URL`是vite环境变量，`BASE_URL`会自动和`vite.config.ts`的`base`配置挂钩
