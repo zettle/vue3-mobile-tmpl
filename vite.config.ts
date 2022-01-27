@@ -7,6 +7,7 @@ import styleImport, { VantResolve } from 'vite-plugin-style-import';
 import { viteMockServe } from 'vite-plugin-mock';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import viteCompression from 'vite-plugin-compression';
 
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfigExport => {
@@ -28,6 +29,9 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       },
     },
     build: {
+      // 分析开启gzip后的大小并给提示，关闭可以提高打包性能
+      reportCompressedSize: false,
+      // 打包后分类存放
       rollupOptions: {
         output: {
           chunkFileNames: 'js/[name]-[hash].js',
@@ -37,23 +41,23 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       },
     },
     plugins: [
-      /**
+      /******************
        * vie自带的
-       */
+       ******************/
       vue(),
       vueJsx(),
 
-      /**
+      /******************
        * mock
-       */
+       ******************/
       viteMockServe({
         mockPath: 'mock',
         localEnabled: command === 'serve',
       }),
 
-      /**
+      /******************
        * 自动引入api和组件
-       */
+       ******************/
       AutoImport({
         include: [
           /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
@@ -86,6 +90,11 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
           },
         ],
       }),
+
+      /******************
+       * 打包gzip
+       ******************/
+      viteCompression(),
     ],
   };
 };

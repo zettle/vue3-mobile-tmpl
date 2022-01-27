@@ -99,7 +99,13 @@ import { Toast } from 'vant';
 Toast('提示内容');
 ```
 
-## 2、commit 之前语法检查和 commit 信息规范
+## 2、语法
+自带了eslint和preitter，我们就继续用就好了
+
+有时候改了没有生效，试下重启vscode或者`ctrl + shift + p`，搜索下`restart eslint server`重启下eslint
+
+
+## 3、commit 之前语法检查和 commit 信息规范
 
 1. 执行 `npx husky-init '&&' npm install`，会生成一个`.husky`文件夹
 
@@ -135,7 +141,7 @@ module.exports = {
 ```
 
 
-## 3、mock数据
+## 4、mock数据
 安装: `npm i vite-plugin-mock mockjs -D`，[相关文档](https://github.com/vbenjs/vite-plugin-mock/blob/main/README.zh_CN.md)
 
 修改`vite.config.ts`如下:
@@ -178,9 +184,10 @@ export default [
 import axios from 'axios';
 await axios.post('/api/post');
 ```
+【注意】只有在本地环境才会启动mock，打包不会把mock也打包进去，所以线上的是访问真实的
 
 
-## 4、多环境配置
+## 5、多环境配置
 和以前的vue-cli一样，支持引用方式改为了`import.meta.env.xxx`
 比如现在多弄个环境变量: `VITE_APP_ENV=local`
 
@@ -203,7 +210,7 @@ interface ImportMeta {
 
 
 ## 打包的优化
-### 按文件类型分文件
+### .1 按文件类型分文件
 vite打包后，默认是把所有静态资源`js/css/png`等都放在`/dist/assets`里面，挺不方便我们看的
 
 ![](./doc/assets.png)
@@ -225,6 +232,13 @@ export default defineConfig({
 再执行打包，可以看文件分开存放了
 
 ![](./img/assets-2.png)
+
+### .2 打包gzip包
+首先将`build.reportCompressedSize = false`，因为开启的话，每次打包都会去分析如果如果打包gzip可以打包成多少体积，这个关闭可以提高打包速度。
+
+因为我们是固定要生成gzip包的。
+
+安装: `npm i -D vite-plugin-compression`
 
 ## 部署
 修改 `vite.config.ts` 的 `base` 配置，相当于我们以前的`publicPath`
