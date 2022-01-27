@@ -251,3 +251,36 @@ const router = createRouter({
 });
 ```
 `import.meta.env.BASE_URL`是vite环境变量，`BASE_URL`会自动和`vite.config.ts`的`base`配置挂钩
+
+
+
+## 其他
+### .1 推荐vscode
+在`/src/.vscode/extensions.json`里面配置了推荐的vscode插件。
+
+【如何将自己的推荐给别人？】
+
+1. 找到自己的插件，点击插件名会打开网页版，复制url上的itemName属性值
+
+![](./doc/plugin-1.png)
+
+![](./doc/plugin-2.png)
+
+2. 将复制的`webben.browserslist`配置到`/src/.vscode/extensions.json`即可
+```json
+{
+  "recommendations": [
+    "webben.browserslist", // browserslist语法高亮
+  ],
+}
+```
+
+
+【如何下载别人项目推荐的插件？】
+1. 打开项目后，点击vscode的插件管理，然后选择“推荐”即可展示推荐的插件列表
+
+![](./doc/plugin-3.png)
+
+2. 点击右上角的云icon可以全部下载
+
+![](./doc/plugin-4.png)
