@@ -1,26 +1,37 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from '@/components/HelloWorld.vue'
-</script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
+    <button
+      type="button"
+      @click="changeCount">
+      {{ count }}
+    </button>
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <router-link to="/">
+          Home
+        </router-link>
+        <router-link to="/about">
+          About
+        </router-link>
       </nav>
     </div>
   </header>
 
-  <RouterView />
+  <router-view></router-view>
 </template>
 
-<style>
+<script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router';
+const count = ref(0);
+
+function changeCount () {
+  count.value+=2;
+}
+</script>
+
+
+<style lang="scss" scoped>
 @import '@/assets/base.css';
 
 #app {
