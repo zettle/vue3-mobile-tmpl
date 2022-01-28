@@ -19,6 +19,8 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       },
     },
     server: {
+      // https: true, // 开启https
+      host: '0.0.0.0', // 所有地址
       // 跨域代理
       proxy: {
         '/channel_api': {

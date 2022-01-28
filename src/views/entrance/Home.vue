@@ -1,5 +1,5 @@
 <template>
-  <van-button type="primary">主要按钮</van-button>
+  <van-button type="primary">按钮可视对讲放款加</van-button>
   <div class="box"></div>
   <h1 v-for="n in 100" :key="n">
     {{ n }}

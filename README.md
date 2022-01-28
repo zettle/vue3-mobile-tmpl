@@ -2,8 +2,9 @@
 
 基于 create-vue，执行 `npm init vue@next` 创建工程
 
-安装下 vue 全家桶和必要的包
+esModule的兼容性: [can I use](https://caniuse.com/?search=es%20module)
 
+安装下 vue 全家桶和必要的包
 ```shell
 npm i vue@next vue-router@next pinia vant@next
 ```
