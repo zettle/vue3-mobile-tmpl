@@ -100,10 +100,22 @@ import { Toast } from 'vant';
 Toast('提示内容');
 ```
 
-## 2、语法
-自带了eslint和preitter，我们就继续用就好了
+## 2、eslint
+自带了eslint，我们就继续用就好了
 
 有时候改了没有生效，试下重启vscode或者`ctrl + shift + p`，搜索下`restart eslint server`重启下eslint
+
+修改``，内容如下:
+```js
+{
+  "env": {
+    node: true
+  }
+}
+```
+不加这个，我们很多插件配置用到`module.export`会提示eslint错误说`module没有定义`
+
+加上这个eslint就能支持node的语法，也就认识了`module.export`
 
 
 ## 3、commit 之前语法检查和 commit 信息规范
@@ -209,6 +221,25 @@ interface ImportMeta {
 ```
 这样就有了很好的提示
 
+
+## 6、postcss
+### 6.1 px转vw
+因为create-vue自带了postcss，所以我们只需要安装: `npm i -D postcss-px-to-viewport`即可。
+
+新建`postcss.config.js`，内容如下:
+```js
+module.exports = {
+  plugins: {
+    'postcss-px-to-viewport': {
+      viewportWidth: 375, // 设计稿的UI宽度，让设计师给750px的
+      minPixelValue: 1, // 小于或等于`1px`不转换为视窗单位，你也可以设置为你想要的值
+      // mediaQuery: false // 默认false，是否在媒体查询的css代码中进行转换
+      exclude: [/nprogress/], // nprogress.css的就不转换了，用其原来的
+    },
+  },
+};
+```
+> 因为vant是375px标准，如果是webpack打包已经找到解决方式，但vite还没找到，待研究
 
 ## 打包的优化
 ### .1 按文件类型分文件

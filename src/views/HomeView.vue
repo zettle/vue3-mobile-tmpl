@@ -1,7 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+</script>
 
 <template>
   <main>
-    <app-layout></app-layout>
+    hello world
   </main>
 </template>

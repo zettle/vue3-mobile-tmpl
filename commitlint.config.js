@@ -1,3 +1,3 @@
-module.exports = { // eslint-disable-line
-  extends: ['@commitlint/config-conventional'],
+module.exports = {
+    extends: ['@commitlint/config-conventional'],
 };

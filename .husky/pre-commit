@@ -1,5 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# npm test # 单元测试
-npm run lint # eslint检查
+npm run lint

@@ -1,13 +1,11 @@
 {
   "recommendations": [
-    "johnsoncodehk.volar", // vue语法高亮
+    "johnsoncodehk.volar", // 官方推荐
     "johnsoncodehk.vscode-typescript-vue-plugin", // 官方推荐
     "hollowtree.vue-snippets", // vue代码片段
     "webben.browserslist", // browserslist语法高亮
     "mikestead.dotenv", // dotenv语法高亮
     "dbaeumer.vscode-eslint", // eslint
-    "esbenp.prettier-vscode", // prettier
-    "stylelint.vscode-stylelint", // stylelint
-    "aaron-bond.better-comments" // 更好的高亮注释
+    "stylelint.vscode-stylelint" // stylelint
   ],
 }
