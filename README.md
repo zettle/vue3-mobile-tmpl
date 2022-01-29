@@ -281,7 +281,9 @@ import 'virtual:svg-icons-register'; // 触发所有svg图标的导入
 
 const symbolId = computed(() => `#icon-${props.name}`); // 单词前面的icon要和vite.cofig.ts里面生成图标的名字一直
 ```
+有时候，我们下载了一个svg，通过color控制颜色没有起效果，那么就去这个svg的代码看下，把所有`fill`属性都删除
 
+![](./doc/fill.png)
 
 > 因为vant是375px标准，如果是webpack打包已经找到解决方式，但vite还没找到，待研究
 

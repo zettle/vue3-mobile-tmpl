@@ -31,6 +31,13 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         },
       },
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import '@/assets/style/_index.scss';`,
+        },
+      },
+    },
     build: {
       // 分析开启gzip后的大小并给提示，关闭可以提高打包性能
       reportCompressedSize: false,
