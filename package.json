@@ -49,6 +49,7 @@
     "vite-plugin-compression": "^0.4.0",
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-style-import": "^1.4.1",
+    "vite-plugin-svg-icons": "^2.0.0",
     "vitest": "^0.1.23",
     "vue-global-api": "^0.4.1",
     "vue-tsc": "^0.29.8"

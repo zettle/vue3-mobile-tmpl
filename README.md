@@ -250,6 +250,12 @@ module.exports = {
 ```
 
 
+## 7、svg图标
+使用插件[vite-plugin-svg-icons](https://github.com/vbenjs/vite-plugin-svg-icons/blob/main/README.zh_CN.md)
+
+1. 安装插件
+
+
 > 因为vant是375px标准，如果是webpack打包已经找到解决方式，但vite还没找到，待研究
 
 ## 打包的优化

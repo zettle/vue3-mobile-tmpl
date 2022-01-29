@@ -8,6 +8,7 @@ import { viteMockServe } from 'vite-plugin-mock';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import viteCompression from 'vite-plugin-compression';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfigExport => {
@@ -15,7 +16,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
     base: '/vuetmpl/', // publicPath，部署二级路径代理的要用到
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url)),
+        '@': fileURLToPath(new URL('./src', import.meta.url)), // import.meta.url=file://E:\mideaspace\vue3-mobile-tmpl\vite.config.ts
       },
     },
     server: {
@@ -97,6 +98,18 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
        * 打包gzip
        ******************/
       viteCompression(),
+
+      /******************
+       * svg管理
+       ******************/
+      createSvgIconsPlugin({
+        iconDirs: [
+          fileURLToPath(
+            new URL('./src/components/baseCom/svg-icon/icon', import.meta.url)
+          ),
+        ],
+        symbolId: 'icon-[dir]-[name]',
+      }),
     ],
   };
 };
