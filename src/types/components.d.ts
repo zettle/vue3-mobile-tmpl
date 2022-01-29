@@ -5,6 +5,9 @@
 declare module 'vue' {
   export interface GlobalComponents {
     AppLayout: typeof import('./../components/baseCom/app-layout.vue')['default']
+    VanButton: typeof import('vant/es')['Button']
+    VanTabbar: typeof import('vant/es')['Tabbar']
+    VanTabbarItem: typeof import('vant/es')['TabbarItem']
   }
 }
 

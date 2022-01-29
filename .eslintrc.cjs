@@ -164,7 +164,7 @@ module.exports = {
     // 'vue/require-name-property': 'warn',
     // 提供给外界用的需要expose，没有的也要声明一下
     // 'vue/require-expose': 'warn',
-    'vue/multi-word-component-names': 'off',
+    'vue/multi-word-component-names': 'off', // 组件要用多单词命名
     // 一定要明确写出类型边界类型
     '@typescript-eslint/explicit-module-boundary-types': [
       'error',

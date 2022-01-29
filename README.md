@@ -100,7 +100,7 @@ import { Toast } from 'vant';
 Toast('提示内容');
 ```
 
-## 2、eslint
+## 2、eslint和stylelint
 自带了eslint和preitter，我们就继续用就好了
 
 有时候改了没有生效，试下重启vscode或者`ctrl + shift + p`，搜索下`restart eslint server`重启下eslint
@@ -229,6 +229,27 @@ module.exports = {
   },
 };
 ```
+`postcss.config.js`的其他配置
+```js
+{
+  unitToConvert: 'px', // 默认px，要转化的单位
+  viewportWidth: 750, // 设计稿的UI宽度，让设计师给750px的
+  minPixelValue: 1, // 小于或等于`1px`不转换为视窗单位，你也可以设置为你想要的值
+  unitPrecision: 5, // 转化后小数点精度
+  propList: ['*'], // 指定要转换的css属性单位，*表示所有
+  viewportUnit: 'vw', // 默认vw，指定需要转化成的视窗单位
+  fontViewportUnit: 'vw', // 默认vw，指定字体需要转换成的视窗单位
+  selectorBlackList: ['xxyy'], // 指定不转化的类名，比如vant-*的都不转换
+  mediaQuery: false, // 默认false，是否在媒体查询的css代码中进行转换
+  replace: true, // 是否转换后直接更换属性值
+  exclude: [/node_module/], // 设置忽略文件
+  landscape: false, // 是否处理横屏情况
+  landscapeUnit: 'vw',
+  landscapeWidth: 568
+}
+```
+
+
 > 因为vant是375px标准，如果是webpack打包已经找到解决方式，但vite还没找到，待研究
 
 ## 打包的优化
