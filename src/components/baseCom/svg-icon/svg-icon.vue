@@ -5,13 +5,11 @@
 </template>
 
 <script lang="ts" setup>
-import 'virtual:svg-icons-register';
+import 'virtual:svg-icons-register'; // 触发所有svg图标的导入
 const props = defineProps({
-  prefix: { type: String, default: 'icon' },
-  name: { type: String, required: true },
-  color: { type: String, default: '#333' },
+  name: { type: String, required: true }, // 图标名，复制svg的文件名
 });
-const symbolId = computed(() => `#${props.prefix}-${props.name}`);
+const symbolId = computed(() => `#icon-${props.name}`);
 </script>
 
 <style lang="scss">

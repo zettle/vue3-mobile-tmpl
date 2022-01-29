@@ -105,7 +105,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       createSvgIconsPlugin({
         iconDirs: [
           fileURLToPath(
-            new URL('./src/components/baseCom/svg-icon/icon', import.meta.url)
+            new URL('./src/components/baseCom/svg-icon/icon', import.meta.url) // 存放图标的目录
           ),
         ],
         symbolId: 'icon-[dir]-[name]',

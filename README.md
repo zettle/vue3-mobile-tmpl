@@ -253,7 +253,34 @@ module.exports = {
 ## 7、svg图标
 使用插件[vite-plugin-svg-icons](https://github.com/vbenjs/vite-plugin-svg-icons/blob/main/README.zh_CN.md)
 
-1. 安装插件
+1. 安装插件: `npm i -D vite-plugin-svg-icons`
+
+2. 修改`vite.config.ts`，内容如下:
+```ts
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+
+export default {
+  plugins: [
+    createSvgIconsPlugin({
+      iconDirs: [
+        fileURLToPath(
+          new URL('./src/components/baseCom/svg-icon/icon', import.meta.url) // 存放icon图标的目录
+        ),
+      ],
+      symbolId: 'icon-[dir]-[name]',
+    }),
+  ]
+}
+```
+
+3. 新建`/src/components/svg-icon/icon/*`文件夹，里面存放我们需要的svg图标
+
+4. 新建`/src/components/svg-icon/svg-icon.vue`，核心代码如下:
+```ts
+import 'virtual:svg-icons-register'; // 触发所有svg图标的导入
+
+const symbolId = computed(() => `#icon-${props.name}`); // 单词前面的icon要和vite.cofig.ts里面生成图标的名字一直
+```
 
 
 > 因为vant是375px标准，如果是webpack打包已经找到解决方式，但vite还没找到，待研究

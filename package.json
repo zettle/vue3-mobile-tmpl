@@ -12,7 +12,7 @@
     "prepare": "husky install",
     "precommit": "git add .",
     "commit": "npx cz",
-    "postcommit": "git push origin vite-svg"
+    "postcommit": "git push origin main"
   },
   "dependencies": {
     "axios": "^0.25.0",
