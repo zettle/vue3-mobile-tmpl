@@ -1,5 +1,5 @@
 <template>
   <main>
-    hello world
+    <app-layout></app-layout>
   </main>
 </template>

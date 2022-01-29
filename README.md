@@ -101,21 +101,11 @@ Toast('提示内容');
 ```
 
 ## 2、eslint
-自带了eslint，我们就继续用就好了
+自带了eslint和preitter，我们就继续用就好了
 
 有时候改了没有生效，试下重启vscode或者`ctrl + shift + p`，搜索下`restart eslint server`重启下eslint
 
-修改``，内容如下:
-```js
-{
-  "env": {
-    node: true
-  }
-}
-```
-不加这个，我们很多插件配置用到`module.export`会提示eslint错误说`module没有定义`
 
-加上这个eslint就能支持node的语法，也就认识了`module.export`
 
 
 ## 3、commit 之前语法检查和 commit 信息规范

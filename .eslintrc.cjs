@@ -7,6 +7,7 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'eslint:recommended',
     '@vue/eslint-config-typescript/recommended',
+    '@vue/eslint-config-prettier',
     'vue-global-api',
   ],
   env: {
@@ -14,11 +15,10 @@ module.exports = {
     'vue/setup-compiler-macros': true,
   },
   rules: {
-    indent: ['error', 2], // js/ts的缩进
-    'vue/html-indent': ['error', 2], // html的缩进
-    'vue/script-indent': ['error', 2], // js的缩进
-
-    semi: ['error', 'always'], // 分号
+    // indent: ['error', 4], // js/ts的缩进
+    // 'vue/html-indent': ['error', 4], // html的缩进
+    // 'vue/script-indent': ['error', 4], // html的缩进
+    // semi: ['error', 'always'], // 分号
 
     // 全部都用ts，样式全部用scss
     'vue/block-lang': [
@@ -155,14 +155,16 @@ module.exports = {
     'vue/space-infix-ops': 'error',
 
     // 反引号字符串前后要空格，一个控制js，一个控制html
-    'template-curly-spacing': ['error', 'always'],
-    'vue/template-curly-spacing': ['error', 'always'],
+    // preitter的是不要，所以这里保持和preitter一致
+    'template-curly-spacing': ['error', 'never'],
+    'vue/template-curly-spacing': ['error', 'never'],
     // 禁止在html写纯字符串，国际化的时候开启很有效果
     // 'vue/no-bare-strings-in-template': ['error'],
     // 强制组件要有name属性
     // 'vue/require-name-property': 'warn',
     // 提供给外界用的需要expose，没有的也要声明一下
     // 'vue/require-expose': 'warn',
+    'vue/multi-word-component-names': 'off',
     // 一定要明确写出类型边界类型
     '@typescript-eslint/explicit-module-boundary-types': [
       'error',
