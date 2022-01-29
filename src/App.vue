@@ -7,8 +7,6 @@
 .box {
   width: 375px;
   height: 200px;
-  background-color: $primary;
   color: #fff;
-  @include no-wrap;
 }
 </style>

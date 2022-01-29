@@ -31,6 +31,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         },
       },
     },
+    // 全局scss变量和mixins等
     css: {
       preprocessorOptions: {
         scss: {
