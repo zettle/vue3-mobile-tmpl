@@ -165,12 +165,6 @@ module.exports = {
     // 提供给外界用的需要expose，没有的也要声明一下
     // 'vue/require-expose': 'warn',
     'vue/multi-word-component-names': 'off', // 组件要用多单词命名
-    // 一定要明确写出类型边界类型
-    '@typescript-eslint/explicit-module-boundary-types': [
-      'error',
-      {
-        allowArgumentsExplicitlyTypedAsAny: true, // 允许明确的使用any类型
-      },
-    ],
+    '@typescript-eslint/no-explicit-any': 'off', // 现实中还是很多地方需要用到any，所以关闭
   },
 };
