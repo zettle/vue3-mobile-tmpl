@@ -7,3 +7,46 @@
   color: #fff;
   font-size: 12px;
 }
+
+/***************
+ * flex相关
+ ***************/
+.flex {
+  display: flex;
+
+  .flex-1 {
+    flex: 1;
+  }
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.flex-dir-column {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}

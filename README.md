@@ -298,7 +298,7 @@ interface ImportMeta {
 
 
 ## 7、postcss
-### 6.1 px转vw
+### 7.1 px转vw
 因为create-vue自带了postcss，所以我们只需要安装: `npm i -D postcss-px-to-viewport`即可。
 
 新建`postcss.config.js`，内容如下:
@@ -333,6 +333,41 @@ module.exports = {
   landscapeWidth: 568
 }
 ```
+
+
+### 7.2 自动加前缀
+安装： `npm i  -D autoprefixer`
+
+修改`postcss.config.js`的配置，加上
+```js
+module.exports = () => {
+  return {
+    plugins: [
+      require('autoprefixer'),
+    ]
+  };
+}
+```
+因为我们现在的`.browserslistrc`设置如下，是针对手机的配置，所以很多前缀已经不需要加了
+```
+Chrome >= 51
+iOS >= 10
+```
+
+如果我们改为下面的配置，就可以看到很多css会加上前缀
+```
+> 1%
+last 2 versions
+```
+比如`display: flex;`会转为下面的代码:
+```css
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+```
+![](./doc/css-flex.png)
 
 
 ## 8、svg图标
