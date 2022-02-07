@@ -78,7 +78,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         ],
         dts: 'src/types/auto-imports.d.ts',
         resolvers: [VantResolver()],
-        imports: ['vue', 'vue-router'],
+        imports: ['vue-router', 'vue'],
       }),
       ViteComponents({
         // dirs: ['src/components'], // 自定义的组件，默认就是'src/components'

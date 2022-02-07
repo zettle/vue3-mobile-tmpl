@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "axios": "^0.25.0",
+    "crypto-js": "^4.1.1",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.9",
     "vant": "^3.4.3",

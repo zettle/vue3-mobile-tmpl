@@ -60,3 +60,16 @@ export function fetchNewsDetail(
 ): Promise<IResponse<INewDetailResp>> {
   return request.post('news/detail', { id });
 }
+
+/******************
+ * 图片上传
+ *****************/
+export interface IFile {
+  fileId: string;
+}
+export function fetchUpload(
+  file: File,
+  fileType: string
+): Promise<IResponse<IFile>> {
+  return request.postForm('upload', { file, fileType });
+}
