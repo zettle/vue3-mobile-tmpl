@@ -5,9 +5,13 @@
 declare module 'vue' {
   export interface GlobalComponents {
     AppLayout: typeof import('./../components/baseCom/app-layout.vue')['default']
+    FetchSkeleton: typeof import('./../components/baseCom/fetch-skeleton.vue')['default']
     SvgIcon: typeof import('./../components/baseCom/svg-icon/svg-icon.vue')['default']
     VanButton: typeof import('vant/es')['Button']
+    VanCell: typeof import('vant/es')['Cell']
     VanNavBar: typeof import('vant/es')['NavBar']
+    VanTabbar: typeof import('vant/es')['Tabbar']
+    VanTabbarItem: typeof import('vant/es')['TabbarItem']
   }
 }
 
