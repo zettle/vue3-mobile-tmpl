@@ -9,11 +9,22 @@
         </van-button>
       </div>
     </fetch-skeleton>
+
+    <van-button type="primary" @click="onDownload">
+      bufferArray方式下载
+    </van-button>
+    <van-button type="primary" @click="onOpenWinDownload">
+      post打开新窗口下载
+    </van-button>
   </app-layout>
 </template>
 
 <script lang="ts" setup>
-import { fetchNewsList, fetchNewsDetail } from '@/service';
+import { fetchNewsList, fetchNewsDetail, fetchDownload } from '@/service';
+import { downloadArrayBuffer, downloadWinForm } from '@/utils';
+/**
+ * 骨架屏
+ */
 const isLoading = ref(false);
 const isEmpty = ref(false);
 (async () => {
@@ -25,9 +36,23 @@ const isEmpty = ref(false);
     isEmpty.value = true;
   }
 })();
+
 // 点击发起ajax
 async function onFetch(id: string) {
   const resp = await fetchNewsDetail(id);
   console.log('resp', resp);
+}
+
+/**
+ * axios下载
+ * 下载方式1：ajax请求bufferArray得到blob，再创建<a>标签下载
+ * 下载方式2：创建<form>标签下载
+ */
+async function onDownload() {
+  const resp = await fetchDownload('example.png');
+  downloadArrayBuffer(resp);
+}
+function onOpenWinDownload() {
+  downloadWinForm('/api/download', { fileName: 'example.png' });
 }
 </script>

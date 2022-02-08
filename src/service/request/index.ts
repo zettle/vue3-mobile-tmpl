@@ -61,6 +61,12 @@ class Request {
   // 公共的请求后拦截
   respIntp(response: AxiosResponse<IResponse>): any {
     const { data } = response;
+    // console.log('response', response.headers['content-disposition'].split('=')); // 获取后端返回的文件名
+    if (response.config.responseType === 'arraybuffer') {
+      // 如果是文件下载类的
+      return data;
+    }
+    console.log('data', data);
     if (data.code === 0) {
       return data;
     } else {
@@ -86,7 +92,7 @@ class Request {
     // return new Promise(() => { /* empty */ }); // 这样外面就不会进入resolve或reject，但感觉这样不太好
   }
 
-  request<T>(config: AxiosRequestConfig): Promise<IResponse<T>> {
+  request<T>(config: AxiosRequestConfig): Promise<T> {
     return this.instance.request(config);
   }
 
@@ -96,7 +102,7 @@ class Request {
     data?: any,
     config?: AxiosRequestConfig
   ): Promise<IResponse<T>> {
-    return this.request<T>({ ...config, url, data, method: 'POST' });
+    return this.request<IResponse<T>>({ ...config, url, data, method: 'POST' });
   }
 
   // Content-Type: application/x-www-form-urlencoded的请求
@@ -111,9 +117,10 @@ class Request {
       method: 'POST',
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
     });
-    return this.request<T>(config);
+    return this.request<IResponse<T>>(config);
   }
 
+  // get请求
   get<T>(
     url: string,
     data: any = {},
@@ -124,8 +131,25 @@ class Request {
       data,
       method: 'GET',
     });
-    return this.request<T>(config);
+    return this.request<IResponse<T>>(config);
+  }
+
+  // 文件下载：
+  downloadByArrayBuffer(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<BlobPart> {
+    config = Object.assign({}, config, {
+      url,
+      data,
+      method: 'POST',
+      responseType: 'arraybuffer',
+    });
+    return this.request<BlobPart>(config);
   }
 }
 
 export default new Request({ baseURL: '/channel_api' });
+
+export const mockRequest = new Request({ baseURL: '/api' });

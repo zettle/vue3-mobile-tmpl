@@ -1,4 +1,4 @@
-import request from './request';
+import request, { mockRequest } from './request';
 import type { IResponse } from './request/types';
 export { default as cancelContainer } from './request/cancelContainer';
 /******************
@@ -72,4 +72,11 @@ export function fetchUpload(
   fileType: string
 ): Promise<IResponse<IFile>> {
   return request.postForm('upload', { file, fileType });
+}
+
+/******************
+ * 下载图片
+ *****************/
+export function fetchDownload(fileName: string): Promise<BlobPart> {
+  return mockRequest.downloadByArrayBuffer('download', { fileName });
 }
