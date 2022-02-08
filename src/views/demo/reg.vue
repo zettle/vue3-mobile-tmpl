@@ -1,9 +1,4 @@
-<template>
-  <app-layout> </app-layout>
-</template>
-
 <script lang="ts" setup>
-import { ref } from 'vue';
 import { isPassIdCardReg, isPassPhoneReg } from '@/utils';
 
 console.log('123123 是否是身份证', isPassIdCardReg('123123'));
@@ -13,9 +8,10 @@ console.log(
 );
 console.log('123 手机号', isPassPhoneReg('123'));
 console.log('15988888888 手机号', isPassPhoneReg('15988888888'));
-
-const count = ref(0);
-function changeCount() {
-  count.value += 1;
-}
 </script>
+
+<template>
+  <app-layout>
+    <div>正则匹配</div>
+  </app-layout>
+</template>

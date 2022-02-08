@@ -74,7 +74,7 @@ module.exports = {
     'vue/component-tags-order': [
       'error',
       {
-        order: ['docs', 'template', 'script', 'style'],
+        order: ['docs', 'route', 'script', 'template', 'style'],
       },
     ],
     // html的内容是否要换行

@@ -1,8 +1,3 @@
-<template>
-  <input ref="fileRef" type="file" />
-  <van-button type="primary" @click="onUpload">上传</van-button>
-</template>
-
 <script lang="ts" setup>
 import { fetchUpload } from '@/service';
 import { Ref } from 'vue';
@@ -18,3 +13,8 @@ async function onUpload() {
   console.log('resp', resp);
 }
 </script>
+
+<template>
+  <input ref="fileRef" type="file" />
+  <van-button type="primary" @click="onUpload">上传</van-button>
+</template>

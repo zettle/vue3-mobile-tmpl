@@ -24,6 +24,7 @@ npm i vue@next vue-router@next pinia vant@next
 [ ] 多语言
 [x] 封装个组件，集合loading、no-result进去，同时也支持插槽
 [ ] 提交按钮处理loading状态的封装
+[x] 文件系统路由，文件名即路由规则
 
 ## 1、自动引入
 
@@ -422,6 +423,11 @@ export default {
 }
 ```
 
+
+## 10、文件系统路由
+引入[vite-plugin-pages](https://github.com/hannoeru/vite-plugin-pages)，路由定义通过文件名称来区分
+
+并且自动引入，不用每次自己再去写了
 
 
 ## 打包的优化

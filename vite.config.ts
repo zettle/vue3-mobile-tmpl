@@ -9,6 +9,7 @@ import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import viteCompression from 'vite-plugin-compression';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import Pages from 'vite-plugin-pages';
 
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfigExport => {
@@ -117,6 +118,21 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
           ),
         ],
         symbolId: 'icon-[dir]-[name]',
+      }),
+
+      /******************
+       * 约定路由
+       ******************/
+      Pages({
+        dirs: 'src/views',
+        extendRoute(route) {
+          // console.log('route', route);
+          if (route.path === '/') {
+            // 将 `entrance/home`作为首页
+            return { redirect: '/entrance/home' };
+          }
+          return route;
+        },
       }),
     ],
   };

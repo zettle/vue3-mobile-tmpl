@@ -1,9 +1,3 @@
-<template>
-  <svg aria-hidden="true" class="svg-icon">
-    <use :xlink:href="symbolId" />
-  </svg>
-</template>
-
 <script lang="ts" setup>
 import 'virtual:svg-icons-register'; // 触发所有svg图标的导入
 const props = defineProps({
@@ -11,6 +5,12 @@ const props = defineProps({
 });
 const symbolId = computed(() => `#icon-${props.name}`);
 </script>
+
+<template>
+  <svg aria-hidden="true" class="svg-icon">
+    <use :xlink:href="symbolId" />
+  </svg>
+</template>
 
 <style lang="scss">
 .svg-icon {

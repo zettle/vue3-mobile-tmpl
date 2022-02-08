@@ -1,12 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import routes from './routes';
+// import routes from './routes';
 import { nprogress, setDocTitle } from '@/utils';
 import { IMeta } from './types';
 import { cancelContainer } from '@/service';
+import routes from '~pages';
+
+console.log('routes', routes);
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes,
+  routes: [
+    ...routes,
+    {
+      path: '/:pathMatch(.*)', // 配置404
+      // redirect: '/error/404' // 不推荐redirect，会url重定向，但我们往往希望在url保留着那个404的地址，只是界面展示not found界面
+      component: () => import('@/views/error/NotFound.vue'),
+    },
+  ],
   scrollBehavior(to, from, savedPosition) {
     // 滚动行为
     return { top: savedPosition?.top ?? 0 };

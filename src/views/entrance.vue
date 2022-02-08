@@ -1,3 +1,11 @@
+<script lang="ts" setup>
+const switchBar = [
+  { icon: 'wap-home', name: '首d页', url: '/entrance/home' },
+  { icon: 'cart', name: '个人中心', url: '/entrance/mine' },
+  { icon: 'manager', name: '其他', url: '/entrance/demo' },
+];
+</script>
+
 <template>
   <div class="entrance-content">
     <router-view></router-view>
@@ -13,14 +21,6 @@
     </van-tabbar-item>
   </van-tabbar>
 </template>
-
-<script lang="ts" setup>
-const switchBar = [
-  { icon: 'wap-home', name: '首d页', url: '/entrance/home' },
-  { icon: 'cart', name: '个人中心', url: '/entrance/mine' },
-  { icon: 'manager', name: '其他', url: '/entrance/demo' },
-];
-</script>
 
 <style lang="scss" scoped>
 .entrance-content {
