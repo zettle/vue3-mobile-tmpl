@@ -10,6 +10,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import viteCompression from 'vite-plugin-compression';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import Pages from 'vite-plugin-pages';
+// import visualizer from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfigExport => {
@@ -36,6 +37,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
     css: {
       preprocessorOptions: {
         scss: {
+          charset: false,
           additionalData: `@import '@/assets/style/_index.scss';`,
         },
       },
@@ -54,7 +56,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
     },
     plugins: [
       /******************
-       * vie自带的
+       * vite自带的
        ******************/
       vue(),
       vueJsx(),
@@ -134,6 +136,11 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
           return route;
         },
       }),
+
+      // visualizer({
+      //   open: true,
+      //   gzipSize: true,
+      // }),
     ],
   };
 };
