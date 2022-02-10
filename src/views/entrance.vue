@@ -7,19 +7,20 @@ const switchBar = [
 </script>
 
 <template>
-  <div class="entrance-content">
-    <router-view></router-view>
+  <div>
+    <div class="entrance-content">
+      <router-view></router-view>
+    </div>
+    <van-tabbar route>
+      <van-tabbar-item
+        v-for="(item, $index) of switchBar"
+        :key="$index"
+        :icon="item.icon"
+        :to="item.url">
+        {{ item.name }}
+      </van-tabbar-item>
+    </van-tabbar>
   </div>
-  <van-tabbar route>
-    <van-tabbar-item
-      v-for="(item, $index) of switchBar"
-      :key="$index"
-      :icon="item.icon"
-      replace
-      :to="item.url">
-      {{ item.name }}
-    </van-tabbar-item>
-  </van-tabbar>
 </template>
 
 <style lang="scss" scoped>

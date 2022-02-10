@@ -9,9 +9,7 @@ declare module 'vue' {
     SvgIcon: typeof import('./../components/baseCom/svg-icon/svg-icon.vue')['default']
     VanButton: typeof import('vant/es')['Button']
     VanCell: typeof import('vant/es')['Cell']
-    VanEmpty: typeof import('vant/es')['Empty']
     VanNavBar: typeof import('vant/es')['NavBar']
-    VanSkeleton: typeof import('vant/es')['Skeleton']
     VanTabbar: typeof import('vant/es')['Tabbar']
     VanTabbarItem: typeof import('vant/es')['TabbarItem']
   }
