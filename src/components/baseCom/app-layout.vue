@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { useRoute, useRouter } from 'vue-router';
-
 defineProps({
   isWhitePage: { type: Boolean },
 });

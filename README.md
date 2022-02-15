@@ -83,6 +83,22 @@ module.exports = {
 };
 ```
 
+而pinia/vue-router/vuex没有这种插件包，所以用下面方式，修改`.eslintrc.cjs`，如下
+```js
+module.exports = {
+  globals: {
+    // vue-router的
+    useRoute: true,
+    useRouter: true,
+    // vuex的
+    useStore: true,
+    // pinia的
+    storeToRefs: true
+  },
+};
+```
+【发现：】对于`.ts`文件能自动根据`/src/types/auto-imports.d.ts`里面的识别，不用配置上面的也可以，但是对于`.vue`文件还是需要配置上面信息
+
 5. 对于 vant 里面一些服务式 api，比如 Toast，我们使用的时候还是需要手动 import 和引入样式，我们可以用下面的方式自动引入样式
 
 安装: `npm i -D vite-plugin-style-import`

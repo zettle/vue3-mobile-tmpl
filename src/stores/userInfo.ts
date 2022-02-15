@@ -1,5 +1,4 @@
-import { Ref, ref } from 'vue';
-import { defineStore } from 'pinia';
+import type { Ref } from 'vue';
 import { defineSessionStorage } from '@/storage';
 import { ILoginResp } from '@/service';
 
