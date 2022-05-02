@@ -43,6 +43,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       },
     },
     build: {
+      // manifest: true, // 生成manifest.json文件
       // 分析开启gzip后的大小并给提示，关闭可以提高打包性能
       reportCompressedSize: false,
       // 打包后分类存放
