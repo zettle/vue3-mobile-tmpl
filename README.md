@@ -445,7 +445,32 @@ export default {
 
 并且自动引入，不用每次自己再去写了
 
+安装: `npm install -D vite-plugin-pages`
+
+修改`vite.config.ts`
+
+```ts
+import Pages from 'vite-plugin-pages';
+
+export default {
+  plugins: [Pages()],
+};
+```
+
+修改`/router/index.ts`，内容如下:
+
+```ts
+import { createRouter } from 'vue-router';
+import routes from '~pages';
+
+const router = createRouter({
+  // ...
+  routes,
+});
+```
+
 大致映射规则如下:
+
 ```
 
 ```
