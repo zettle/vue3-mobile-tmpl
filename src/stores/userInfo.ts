@@ -1,6 +1,6 @@
 import type { Ref } from 'vue';
 import { defineSessionStorage } from '@/storage';
-import { ILoginResp } from '@/service';
+import type { ILoginResp } from '@/service';
 
 const useUserInfoStore = defineStore('userInfo', function () {
   // 登录token

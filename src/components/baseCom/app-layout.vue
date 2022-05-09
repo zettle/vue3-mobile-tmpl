@@ -1,3 +1,11 @@
+<template>
+  <div :class="['page', { white: isWhitePage }]">
+    <van-nav-bar left-arrow :title="pageTitle" @click-left="handleClickLeft">
+    </van-nav-bar>
+    <slot></slot>
+  </div>
+</template>
+
 <script lang="ts" setup>
 defineProps({
   isWhitePage: { type: Boolean },
@@ -13,14 +21,6 @@ function handleClickLeft() {
   router.go(-1);
 }
 </script>
-
-<template>
-  <div :class="['page', { white: isWhitePage }]">
-    <van-nav-bar left-arrow :title="pageTitle" @click-left="handleClickLeft">
-    </van-nav-bar>
-    <slot></slot>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .page {

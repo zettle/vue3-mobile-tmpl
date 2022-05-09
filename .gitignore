@@ -6,20 +6,20 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-.stylelintcache
 
 node_modules
 .DS_Store
 dist
 dist-ssr
+coverage
 *.local
 
 /cypress/videos/
 /cypress/screenshots/
 
-# Editor directories and files 觉得还是上次大家保持一致会好一点
-# .vscode/*
-# !.vscode/extensions.json
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
 .idea
 *.suo
 *.ntvs*

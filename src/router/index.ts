@@ -1,14 +1,14 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 // import routes from './routes';
 import { nprogress, setDocTitle } from '@/utils';
-import { IMeta } from './types';
+import type { IMeta } from './types';
 import { cancelContainer } from '@/service';
 import routes from '~pages';
 
 console.log('routes', routes);
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     ...routes,
     {

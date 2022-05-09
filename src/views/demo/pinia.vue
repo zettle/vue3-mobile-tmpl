@@ -1,3 +1,15 @@
+<template>
+  <app-layout>
+    <p>count: {{ count }}</p>
+    <p>double: {{ doubleCount }}</p>
+    <van-button type="primary" @click="handleAddCount"> 改变 </van-button>
+    <p>name: {{ counterStore.name }}</p>
+    <van-button plain type="primary" @click="handleChangeName">
+      1s后改变
+    </van-button>
+  </app-layout>
+</template>
+
 <script lang="ts" setup>
 import useCounterStore from '@/stores/counter';
 const counterStore = useCounterStore();
@@ -16,15 +28,3 @@ function handleChangeName() {
   counterStore.incrementAsync(newName);
 }
 </script>
-
-<template>
-  <app-layout>
-    <p>count: {{ count }}</p>
-    <p>double: {{ doubleCount }}</p>
-    <van-button type="primary" @click="handleAddCount"> 改变 </van-button>
-    <p>name: {{ counterStore.name }}</p>
-    <van-button plain type="primary" @click="handleChangeName">
-      1s后改变
-    </van-button>
-  </app-layout>
-</template>

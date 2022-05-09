@@ -1,21 +1,19 @@
 import { fileURLToPath, URL } from 'url';
-import { UserConfigExport, ConfigEnv } from 'vite';
+import type { UserConfigExport, ConfigEnv } from 'vite';
 import AutoImport from 'unplugin-auto-import/vite';
 import ViteComponents from 'unplugin-vue-components/vite';
 import { VantResolver } from 'unplugin-vue-components/resolvers';
-import styleImport, { VantResolve } from 'vite-plugin-style-import';
+import { createStyleImportPlugin, VantResolve } from 'vite-plugin-style-import';
 import { viteMockServe } from 'vite-plugin-mock';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import viteCompression from 'vite-plugin-compression';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import Pages from 'vite-plugin-pages';
-// import visualizer from 'rollup-plugin-visualizer';
-
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfigExport => {
   return {
-    base: '/vuetmpl/', // publicPath，部署二级路径代理的要用到
+    base: './', // publicPath，部署二级路径代理的要用到
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)), // import.meta.url=file://E:\mideaspace\vue3-mobile-tmpl\vite.config.ts
@@ -47,13 +45,13 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       // 分析开启gzip后的大小并给提示，关闭可以提高打包性能
       reportCompressedSize: false,
       // 打包后分类存放
-      rollupOptions: {
-        output: {
-          chunkFileNames: 'js/[name]-[hash].js',
-          entryFileNames: 'js/[name]-[hash].js',
-          assetFileNames: '[ext]/[name]-[hash].[ext]',
-        },
-      },
+      // rollupOptions: {
+      //   output: {
+      //     chunkFileNames: 'js/[name]-[hash].js',
+      //     entryFileNames: 'js/[name]-[hash].js',
+      //     assetFileNames: '[ext]/[name]-[hash].[ext]',
+      //   },
+      // },
     },
     plugins: [
       /******************
@@ -61,15 +59,13 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
        ******************/
       vue(),
       vueJsx(),
-
       /******************
        * mock
        ******************/
       viteMockServe({
-        mockPath: 'mock',
-        localEnabled: command === 'serve',
+        mockPath: 'mock', // mock的目录
+        localEnabled: command === 'serve', // 当执行`vite serve`说明启动本地，用mock数据，其他就不用mock数据
       }),
-
       /******************
        * 自动引入api和组件
        ******************/
@@ -84,6 +80,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         resolvers: [VantResolver()],
         imports: ['vue', 'vue-router', 'pinia'],
       }),
+      // 自动引入vant的包
       ViteComponents({
         // dirs: ['src/components'], // 自定义的组件，默认就是'src/components'
         dts: 'src/types/components.d.ts', // 默认true表示生成声明文件（会生成后存在根目录），如果设置字符串表示存放路径
@@ -92,7 +89,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         resolvers: [VantResolver()],
         // directoryAsNamespace: false, // 允许子目录作为组件的命名空间前缀
       }),
-      styleImport({
+      createStyleImportPlugin({
         resolves: [VantResolve()],
         // 自定义规则
         libs: [
@@ -110,7 +107,6 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
        * 打包gzip
        ******************/
       viteCompression(),
-
       /******************
        * svg管理
        ******************/
@@ -122,7 +118,6 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         ],
         symbolId: 'icon-[dir]-[name]',
       }),
-
       /******************
        * 约定路由
        ******************/
@@ -137,11 +132,6 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
           return route;
         },
       }),
-
-      // visualizer({
-      //   open: true,
-      //   gzipSize: true,
-      // }),
     ],
   };
 };

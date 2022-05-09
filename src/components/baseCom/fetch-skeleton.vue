@@ -1,3 +1,12 @@
+<template>
+  <van-skeleton :loading="isLoading" :row="row" v-bind="$attrs">
+    <slot v-if="isEmpty" name="empty">
+      <van-empty description="暂无数据"></van-empty>
+    </slot>
+    <slot v-else></slot>
+  </van-skeleton>
+</template>
+
 <script lang="ts" setup>
 import { defineProps } from 'vue';
 defineProps({
@@ -13,12 +22,3 @@ export default {
   inheritAttrs: false,
 };
 </script>
-
-<template>
-  <van-skeleton :loading="isLoading" :row="row" v-bind="$attrs">
-    <slot v-if="isEmpty" name="empty">
-      <van-empty description="暂无数据"></van-empty>
-    </slot>
-    <slot v-else></slot>
-  </van-skeleton>
-</template>

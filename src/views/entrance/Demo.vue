@@ -3,6 +3,20 @@ meta:
   title: demo页面
 </route>
 
+<template>
+  <app-layout>
+    <van-cell is-link title="vantUI 外链" @click="openVantUrl"> </van-cell>
+
+    <van-cell
+      v-for="(item, $index) of pageRoutes"
+      :key="$index"
+      is-link
+      :title="item.title"
+      :to="item.to">
+    </van-cell>
+  </app-layout>
+</template>
+
 <script lang="ts" setup>
 /**
  * 打开vantUI外链
@@ -23,17 +37,3 @@ const pageRoutes = [
   { title: '正则测试', to: '/demo/reg' },
 ];
 </script>
-
-<template>
-  <app-layout>
-    <van-cell is-link title="vantUI 外链" @click="openVantUrl"> </van-cell>
-
-    <van-cell
-      v-for="(item, $index) of pageRoutes"
-      :key="$index"
-      is-link
-      :title="item.title"
-      :to="item.to">
-    </van-cell>
-  </app-layout>
-</template>

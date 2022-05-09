@@ -1,11 +1,3 @@
-<script lang="ts" setup>
-// console.log('VITE_APP_ENV', import.meta.env.VITE_APP_ENV);
-// console.log('MODE', import.meta.env.MODE);
-// console.log('BASE_URL', import.meta.env.BASE_URL);
-// console.log('PROD', import.meta.env.PROD);
-// console.log('DEV', import.meta.env.DEV);
-</script>
-
 <template>
   <div>
     <div class="box"></div>
@@ -16,6 +8,14 @@
     </h1>
   </div>
 </template>
+
+<script lang="ts" setup>
+// console.log('VITE_APP_ENV', import.meta.env.VITE_APP_ENV);
+// console.log('MODE', import.meta.env.MODE);
+// console.log('BASE_URL', import.meta.env.BASE_URL);
+// console.log('PROD', import.meta.env.PROD);
+// console.log('DEV', import.meta.env.DEV);
+</script>
 
 <style lang="scss" scoped>
 .box {
