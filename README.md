@@ -154,6 +154,23 @@ Toast('提示内容');
 
 有时候改了没有生效，试下重启 vscode 或者`ctrl + shift + p`，搜索下`restart eslint server`重启下 eslint
 
+因为
+```js
+module.exports = {
+  ...
+}
+```
+提示 `'module' is not defined` 
+
+需要修改`.eslintrc.cjs`如下，使其支持node环境
+```js
+module.exports = {
+  env: {
+    node: true,
+  },
+};
+```
+
 ## 3、stylelint
 
 1. 安装: `npm i -D stylelint stylelint-config-standard stylelint-scss stylelint-order stylelint-config-rational-order postcss-html postcss-scss`
@@ -161,6 +178,7 @@ Toast('提示内容');
 > - `stylelint-scss`: 配合 scss 的
 > - `stylelint-order`: 检查顺序的
 > - `stylelint-config-rational-order`: 别人写好的 order 顺序，就不用自己写了
+> - `postcss-html`: 检查vue文件
 
 2. 新建`.stylelintrc.js`文件，用于配置 stylelint 的规则等配置信息
 

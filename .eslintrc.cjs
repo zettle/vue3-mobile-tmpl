@@ -3,6 +3,9 @@ require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
   root: true,
+  env: {
+    node: true,
+  },
   globals: {
     // vue-router的
     useRoute: true,

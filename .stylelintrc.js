@@ -6,6 +6,7 @@ module.exports = {
   ],
   plugins: ['stylelint-scss', 'stylelint-order'],
   overrides: [
+    // 要加上下面的配置才会检查.vue和.scss文件
     {
       files: ['**/*.scss'],
       customSyntax: 'postcss-scss',
