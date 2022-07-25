@@ -107,6 +107,13 @@ module.exports = {
 
 【发现：】对于`.ts`文件能自动根据`/src/types/auto-imports.d.ts`里面的识别，不用配置上面的也可以，但是对于`.vue`文件还是需要配置上面信息
 
+配置完上面之后，项目就可以直接使用vant组件
+```vue
+<template>
+  <van-button type="primary">按钮</van-button>
+</template>
+```
+
 5. 对于 vant 里面一些服务式 api，比如 Toast，我们使用的时候还是需要手动 import 和引入样式，我们可以用下面的方式自动引入样式
 
 安装: `npm i -D consola vite-plugin-style-import`
@@ -124,7 +131,7 @@ export default defineConfig({
           libraryName: 'vant',
           esModule: true,
           resolveStyle: (name) => {
-            return `vant/es/${name}/style/index`;
+            return `../es/${name}/style/index`;
           },
         },
       ],
