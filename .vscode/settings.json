@@ -1,76 +1,8 @@
 {
-  "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascriptreact]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[jsonc]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[vue]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[yaml]": {
-      "editor.autoIndent": "advanced",
-      // "editor.defaultFormatter": "redhat.vscode-yaml",
-      "editor.insertSpaces": true,
-      "editor.tabSize": 2
-      // "gitlens.codeLens.scopes": ["document"]
-  },
-  "cSpell.userWords": [],
-  "editor.bracketPairColorization.enabled": true,
   "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true,
-      "source.fixAll.stylelint": true
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
   },
-  "editor.formatOnPaste": true,
-  "editor.formatOnSave": true,
-  "editor.formatOnType": true,
-  "editor.quickSuggestions": {
-      "strings": true
-  },
-  "editor.suggest.preview": true,
-  "editor.suggestSelection": "first",
-  "eslint.codeActionsOnSave.mode": "problems",
-  "eslint.probe": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "html", "markdown"],
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "html", "markdown"],
-  // "files.eol": "\n",
-  "files.exclude": {
-      "**/.classpath": true,
-      "**/.factorypath": true,
-      "**/.project": true,
-      "**/.settings": true
-  },
-  "javascript.inlayHints.enumMemberValues.enabled": true,
-  "javascript.preferences.importModuleSpecifier": "non-relative",
-  "javascript.preferences.quoteStyle": "single",
-  "javascript.suggest.completeFunctionCalls": true,
-  "js/ts.implicitProjectConfig.checkJs": true,
-  "js/ts.implicitProjectConfig.experimentalDecorators": true,
-  "stylelint.packageManager": "npm",
-  "stylelint.snippet": ["css", "less", "postcss", "scss", "sass", "vue"],
   "stylelint.validate": ["css", "less", "postcss", "scss", "sass", "vue"],
-  "vetur.format.defaultFormatter.css": "prettier",
-  "vetur.format.defaultFormatter.html": "prettier",
-  "vetur.format.defaultFormatter.js": "prettier-eslint",
-  "vetur.format.defaultFormatter.less": "prettier",
-  "vetur.format.defaultFormatter.postcss": "prettier",
-  "vetur.format.defaultFormatter.scss": "prettier",
-  "vetur.format.defaultFormatter.ts": "prettier",
-  "vetur.format.enable": true,
-  "vetur.languageFeatures.codeActions": true,
-  "vetur.validation.script": true,
-  "vetur.validation.style": true,
-  "vetur.validation.template": true,
   "GitCommitPlugin.ShowEmoji": false
 }

@@ -30,7 +30,30 @@ header {
 .logo {
   display: block;
   margin: 0 auto 2rem;
-  font-size: 233px;
+  font-size: 23px;
+}
+
+@mixin important-text {
+  color: red;
+  font-weight: bold;
+  font-size: 25px;
+  border: 1px solid blue;
+}
+
+.box {
+  @include mixin-name;
+
+  .box {
+    @include mixin-name;
+
+    .box {
+      @include mixin-name;
+
+      .box {
+        @include mixin-name;
+      }
+    }
+  }
 }
 
 nav {

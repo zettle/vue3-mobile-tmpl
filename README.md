@@ -175,10 +175,11 @@ module.exports = {
 
 1. 安装: `npm i -D stylelint stylelint-config-standard-scss stylelint-scss stylelint-order stylelint-config-rational-order postcss-html postcss-scss`
 
-> - `stylelint-scss`: 配合 scss 的
-> - `stylelint-order`: 检查顺序的
-> - `stylelint-config-rational-order`: 别人写好的 order 顺序，就不用自己写了
-> - `postcss-html`: 检查vue文件
+> `stylelint-config-standard-scss`: scss标准规范，如果项目用的是纯css则使用`stylelint-config-standard`标准
+> `stylelint-scss`: 配合 scss 的
+> `stylelint-order`: 检查顺序的
+> `stylelint-config-rational-order`: 别人写好的 order 顺序，就不用自己写了
+> `postcss-html`: 检查vue文件
 
 2. 新建`.stylelintrc.js`文件，用于配置 stylelint 的规则等配置信息
 
