@@ -1,8 +1,10 @@
 {
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
-    "source.fixAll.stylelint": true
+    "source.fixAll.stylelint·": true
   },
+  "stylelint.packageManager": "npm",
+  "stylelint.snippet": ["css", "less", "postcss", "scss", "sass", "vue"],
   "stylelint.validate": ["css", "less", "postcss", "scss", "sass", "vue"],
   "GitCommitPlugin.ShowEmoji": false
 }

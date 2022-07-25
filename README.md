@@ -173,7 +173,7 @@ module.exports = {
 
 ## 3、stylelint
 
-1. 安装: `npm i -D stylelint stylelint-config-standard stylelint-scss stylelint-order stylelint-config-rational-order postcss-html postcss-scss`
+1. 安装: `npm i -D stylelint stylelint-config-standard-scss stylelint-scss stylelint-order stylelint-config-rational-order postcss-html postcss-scss`
 
 > - `stylelint-scss`: 配合 scss 的
 > - `stylelint-order`: 检查顺序的
@@ -201,8 +201,11 @@ module.exports = {
 ```json
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.stylelint": true
-  }
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint·": true
+  },
+  "stylelint.validate": ["css", "less", "postcss", "scss", "sass", "vue"],
+  "GitCommitPlugin.ShowEmoji": false
 }
 ```
 

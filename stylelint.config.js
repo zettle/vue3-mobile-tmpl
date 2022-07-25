@@ -1,18 +1,17 @@
 module.exports = {
   root: true,
   extends: [
-    'stylelint-config-standard',
+    'stylelint-config-standard-scss',
     'stylelint-config-rational-order', // 顺序规范
   ],
   plugins: ['stylelint-scss', 'stylelint-order'],
   overrides: [
-    // 要加上下面的配置才会检查.vue和.scss文件
     {
-      files: ['**/*.scss'],
+      files: ['*.scss', '**/*.scss'],
       customSyntax: 'postcss-scss',
     },
     {
-      files: ['**/*.vue'],
+      files: ['**/*.vue', '**/*.vue'],
       customSyntax: 'postcss-html',
     },
   ],
@@ -21,5 +20,8 @@ module.exports = {
     // 否则while/each/mixin/include这些scss语法会提示错误
     'at-rule-no-unknown': null,
     'scss/at-rule-no-unknown': true,
+
+    // 限制选择器层级，最多3层
+    'selector-max-compound-selectors': 3,
   },
 };
