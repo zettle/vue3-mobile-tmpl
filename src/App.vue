@@ -28,9 +28,9 @@ header {
 }
 
 .logo {
-  font-size: 233px;
   display: block;
   margin: 0 auto 2rem;
+  font-size: 233px;
 }
 
 nav {
