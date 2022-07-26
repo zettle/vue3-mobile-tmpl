@@ -257,40 +257,6 @@ Unknown word  CssSyntaxError
 
 参考资料: [vue3 + vite 项目搭建 - 配置 stylelint (vue scss)](https://blog.csdn.net/qq_40026668/article/details/121565714)
 
-## 4、commit 之前语法检查和 commit 信息规范
-
-1. 执行 `npx husky-init '&&' npm install`，会生成一个`.husky`文件夹
-
-2. 修改`.husky/pre-commit`的内容，加上下面，这样在执行`git commit`的时候就会执行里面的命令
-
-```
-npm test # 单元测试
-npm run lint # eslint检查
-```
-
-3. 安装`npm i -D commitizen`，并执行`npx commitizen init cz-conventional-changelog --save-dev --save-exact`
-
-4. 修改`package.json`添加命令
-
-```json
-{
-  "scripts": {
-    "precommit": "git add .",
-    "commit": "npx cz",
-    "postcommit": "git push"
-  }
-}
-```
-
-5. 安装`npm i -D @commitlint/config-conventional @commitlint/cli`，并执行`node node_modules/husky/lib/bin.js add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'`
-
-6. 新建`commitlint.config.js`，内容如下:
-
-```js
-module.exports = {
-  extends: ['@commitlint/config-conventional'],
-};
-```
 
 ## 5、mock 数据
 
@@ -346,7 +312,10 @@ await axios.post('/api/post');
 ## 6、多环境配置
 
 和以前的 vue-cli 一样，支持引用方式改为了`import.meta.env.xxx`
+
 比如现在多弄个环境变量: `VITE_APP_ENV=local`
+
+分别新建`.env.development/.env.production/.env.sit`并在每个文件中定义好`VITE_APP_ENV`
 
 那么引入的时候，就写成: `import.meta.env.VITE_APP_ENV`
 
