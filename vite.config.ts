@@ -9,6 +9,9 @@ import { createStyleImportPlugin, VantResolve } from 'vite-plugin-style-import';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    port: 8080,
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

@@ -258,6 +258,105 @@ Unknown word  CssSyntaxError
 参考资料: [vue3 + vite 项目搭建 - 配置 stylelint (vue scss)](https://blog.csdn.net/qq_40026668/article/details/121565714)
 
 
+
+## 4、postcss
+
+### 4.1 px转vw（不能设置最大尺寸，暂不使用）
+因为 create-vue 自带了 postcss，所以我们只需要安装: `npm i -D postcss-px-to-viewport`即可。
+
+新建`postcss.config.js`，内容如下:
+
+```js
+module.exports = {
+  plugins: {
+    'postcss-px-to-viewport': {
+      viewportWidth: 375, // 设计稿的UI宽度，让设计师给750px的
+      minPixelValue: 1, // 小于或等于`1px`不转换为视窗单位，你也可以设置为你想要的值
+      // mediaQuery: false // 默认false，是否在媒体查询的css代码中进行转换
+      exclude: [/nprogress/], // nprogress.css的就不转换了，用其原来的
+    },
+  },
+};
+```
+
+`postcss.config.js`的其他配置
+
+```js
+{
+  unitToConvert: 'px', // 默认px，要转化的单位
+  viewportWidth: 750, // 设计稿的UI宽度，让设计师给750px的
+  minPixelValue: 1, // 小于或等于`1px`不转换为视窗单位，你也可以设置为你想要的值
+  unitPrecision: 5, // 转化后小数点精度
+  propList: ['*'], // 指定要转换的css属性单位，*表示所有
+  viewportUnit: 'vw', // 默认vw，指定需要转化成的视窗单位
+  fontViewportUnit: 'vw', // 默认vw，指定字体需要转换成的视窗单位
+  selectorBlackList: ['xxyy'], // 指定不转化的类名，比如vant-*的都不转换
+  mediaQuery: false, // 默认false，是否在媒体查询的css代码中进行转换
+  replace: true, // 是否转换后直接更换属性值
+  exclude: [/node_module/], // 设置忽略文件
+  landscape: false, // 是否处理横屏情况
+  landscapeUnit: 'vw',
+  landscapeWidth: 568
+}
+```
+
+### 4.2 px转rem
+安装: `npm i -D postcss-pxtorem`
+
+修改`postcss.config.js`如下:
+```js
+module.exports = {
+  plugins: {
+    'postcss-pxtorem': {
+      rootValue: 37.5, // 375尺寸，让设计师给375px的设计稿
+      minPixelValue: 2, // 小于2px的不会转为rem，等于2的还是会转
+      propList: ['*'],
+    },
+  },
+};
+```
+
+### 4.3 自动加前缀
+
+安装： `npm i -D autoprefixer`
+
+修改`postcss.config.js`的配置，加上
+
+```js
+module.exports = () => {
+  return {
+    plugins: [require('autoprefixer')],
+  };
+};
+```
+
+因为我们现在的`.browserslistrc`设置如下，是针对手机的配置，所以很多前缀已经不需要加了
+```
+Chrome >= 51
+iOS >= 10
+```
+
+如果我们改为下面的配置，就可以看到很多 css 会加上前缀
+
+```
+> 1%
+last 2 versions
+```
+
+比如`display: flex;`会转为下面的代码:
+
+```css
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+```
+
+![](./doc/css-flex.png)
+
+
+
 ## 5、mock 数据
 
 安装: `npm i vite-plugin-mock mockjs -D`，[相关文档](https://github.com/vbenjs/vite-plugin-mock/blob/main/README.zh_CN.md)
@@ -335,88 +434,6 @@ interface ImportMeta {
 ```
 
 这样就有了很好的提示
-
-## 7、postcss
-
-### 7.1 px 转 vw
-
-因为 create-vue 自带了 postcss，所以我们只需要安装: `npm i -D postcss-px-to-viewport`即可。
-
-新建`postcss.config.js`，内容如下:
-
-```js
-module.exports = {
-  plugins: {
-    'postcss-px-to-viewport': {
-      viewportWidth: 375, // 设计稿的UI宽度，让设计师给750px的
-      minPixelValue: 1, // 小于或等于`1px`不转换为视窗单位，你也可以设置为你想要的值
-      // mediaQuery: false // 默认false，是否在媒体查询的css代码中进行转换
-      exclude: [/nprogress/], // nprogress.css的就不转换了，用其原来的
-    },
-  },
-};
-```
-
-`postcss.config.js`的其他配置
-
-```js
-{
-  unitToConvert: 'px', // 默认px，要转化的单位
-  viewportWidth: 750, // 设计稿的UI宽度，让设计师给750px的
-  minPixelValue: 1, // 小于或等于`1px`不转换为视窗单位，你也可以设置为你想要的值
-  unitPrecision: 5, // 转化后小数点精度
-  propList: ['*'], // 指定要转换的css属性单位，*表示所有
-  viewportUnit: 'vw', // 默认vw，指定需要转化成的视窗单位
-  fontViewportUnit: 'vw', // 默认vw，指定字体需要转换成的视窗单位
-  selectorBlackList: ['xxyy'], // 指定不转化的类名，比如vant-*的都不转换
-  mediaQuery: false, // 默认false，是否在媒体查询的css代码中进行转换
-  replace: true, // 是否转换后直接更换属性值
-  exclude: [/node_module/], // 设置忽略文件
-  landscape: false, // 是否处理横屏情况
-  landscapeUnit: 'vw',
-  landscapeWidth: 568
-}
-```
-
-### 7.2 自动加前缀
-
-安装： `npm i -D autoprefixer`
-
-修改`postcss.config.js`的配置，加上
-
-```js
-module.exports = () => {
-  return {
-    plugins: [require('autoprefixer')],
-  };
-};
-```
-
-因为我们现在的`.browserslistrc`设置如下，是针对手机的配置，所以很多前缀已经不需要加了
-
-```
-Chrome >= 51
-iOS >= 10
-```
-
-如果我们改为下面的配置，就可以看到很多 css 会加上前缀
-
-```
-> 1%
-last 2 versions
-```
-
-比如`display: flex;`会转为下面的代码:
-
-```css
-.flex {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-```
-
-![](./doc/css-flex.png)
 
 ## 8、svg 图标
 
