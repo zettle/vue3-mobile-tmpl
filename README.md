@@ -189,11 +189,15 @@ module.exports = {
 
 ```json
 {
-  "lint:style": "stylelint src/**/*.{html,vue,css,sass,scss} --fix --cache"
+  "lint:style": "stylelint src/**/*.{html,vue,css,sass,scss} --fix --cache --cache-location node_modules/.cache/.stylelintignore"
 }
 ```
 
-因为加了`--cache`所以会生成`.stylelintcache`文件，添加到`.gitignore`里面不要提交 git 仓库
+~~因为加了`--cache`所以会生成`.stylelintcache`文件，添加到`.gitignore`里面不要提交 git 仓库~~
+
+关于`.stylelintcache`的处理方式，我们将其指定存到 `node_modules/.cache/.stylelintignore` 位置，而node_modules本就是我们的忽略目录，所以不会被提交上去
+
+
 
 5. 在 vscode 安装 stylelint 插件，如果不符合规范就会为其标记红色 warm
 
@@ -210,13 +214,7 @@ module.exports = {
 }
 ```
 
-7. 修改`/.husky/pre-commit`，内容如下，让 husky 提交前，执行 stylelint
-
-```txt
-npm run lint:style
-```
-
-**【遇到的问题】**
+**【遇到的问题】新版不会再有下面问题，可以忽略20220701**
 【问题 1】执行`npm run lint:style`总是遇到下面的报错:
 
 ```txt

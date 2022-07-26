@@ -9,7 +9,7 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "lint:style": "stylelint src/**/*.{html,vue,css,sass,scss} --fix"
+    "lint:style": "stylelint src/**/*.{html,vue,css,sass,scss} --fix --cache --cache-location node_modules/.cache/.stylelintignore"
   },
   "dependencies": {
     "pinia": "^2.0.16",

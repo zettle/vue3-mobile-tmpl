@@ -42,18 +42,6 @@ header {
 
 .box {
   @include mixin-name;
-
-  .box {
-    @include mixin-name;
-
-    .box {
-      @include mixin-name;
-
-      .box {
-        @include mixin-name;
-      }
-    }
-  }
 }
 
 nav {
