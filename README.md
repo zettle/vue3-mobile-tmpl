@@ -510,32 +510,39 @@ export default {
 
 并且自动引入，不用每次自己再去写了
 
-安装: `npm install -D vite-plugin-pages`
+1. 安装: `npm install -D vite-plugin-pages`
 
-修改`vite.config.ts`
-
+2. 修改`vite.config.ts`
 ```ts
 import Pages from 'vite-plugin-pages';
-
 export default {
-  plugins: [Pages()],
+  plugins: [
+    Pages({
+      dirs: 'src/views',
+    }),
+  ],
 };
 ```
 
-修改`/router/index.ts`，内容如下:
-
+3. 修改`/router/index.ts`，内容如下:
 ```ts
 import { createRouter } from 'vue-router';
 import routes from '~pages';
-
 const router = createRouter({
   // ...
   routes,
 });
 ```
+修改完之后，ts会提示`找不到模块“~pages”或其相应的类型声明`
+
+4. 修改`env.d.ts`，加入下面声明
+```ts
+/// <reference types="vite-plugin-pages/client" />
+```
+ts的报错即可解决
+
 
 大致映射规则如下:
-
 ```
 
 ```

@@ -7,6 +7,7 @@ import ViteComponents from 'unplugin-vue-components/vite';
 import { VantResolver } from 'unplugin-vue-components/resolvers';
 import { createStyleImportPlugin, VantResolve } from 'vite-plugin-style-import';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import Pages from 'vite-plugin-pages';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -41,6 +42,7 @@ export default defineConfig({
       resolvers: [VantResolver()],
       imports: ['vue', 'vue-router', 'pinia'],
     }),
+
     /**
      * 自动引入vant的包
      */
@@ -67,6 +69,7 @@ export default defineConfig({
         },
       ],
     }),
+
     /**
      * svg图标管理
      */
@@ -77,6 +80,13 @@ export default defineConfig({
         ),
       ],
       symbolId: 'icon-[dir]-[name]',
+    }),
+
+    /**
+     * 自动映射路由
+     */
+    Pages({
+      dirs: 'src/views',
     }),
   ],
 });
