@@ -315,9 +315,10 @@ module.exports = {
   },
 };
 ```
+引入`@/utils/rem`
+
 
 ### 4.3 自动加前缀
-
 安装： `npm i -D autoprefixer`
 
 修改`postcss.config.js`的配置，加上
@@ -337,14 +338,12 @@ iOS >= 10
 ```
 
 如果我们改为下面的配置，就可以看到很多 css 会加上前缀
-
 ```
 > 1%
 last 2 versions
 ```
 
 比如`display: flex;`会转为下面的代码:
-
 ```css
 .flex {
   display: -webkit-box;
@@ -352,7 +351,6 @@ last 2 versions
   display: flex;
 }
 ```
-
 ![](./doc/css-flex.png)
 
 
@@ -422,18 +420,16 @@ await axios.post('/api/post');
 
 ```ts
 /// <reference types="vite/client" />
-
 interface ImportMetaEnv {
   readonly VITE_APP_ENV: string;
   // 更多环境变量...
 }
-
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
 ```
-
 这样就有了很好的提示
+
 
 ## 8、svg 图标
 
