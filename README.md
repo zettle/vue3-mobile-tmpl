@@ -475,29 +475,34 @@ const symbolId = computed(() => `#icon-${props.name}`); // 单词前面的icon�
 }
 </style>
 ```
-
-
 > 有时候，我们下载了一个 svg，通过 color 控制颜色没有起效果，那么就去这个 svg 的代码看下，把所有`fill`属性都删除
 
 
 
-
-
 ## 9、全局 scss 变量和 mixins
-
-vite 自带了，直接用
+vite自带了，直接用
 
 ```ts
 export default {
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import '@/assets/style/_index.scss';`,
+        additionalData: `@import '@/assets/style/g_index.scss';`,
       },
     },
   },
 };
 ```
+那么定义的各种mixins、变量就可以直接在这里引入，然后全局引入到每个scss文件，就不再需要一个个引。
+
+直接使用即可
+```scss
+.box {
+  @include no-wrap;
+  color: $primary;
+}
+```
+
 
 ## 10、文件系统路由
 

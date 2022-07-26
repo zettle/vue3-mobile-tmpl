@@ -1,11 +1,11 @@
 <template>
-  <div>this is home</div>
-  <svg-icon name="home-fill" class="icon-home"></svg-icon>
+  <div class="box">this is home</div>
 </template>
 
 <style lang="scss" scoped>
-.icon-home {
-  color: red;
-  font-size: 20px;
+.box {
+  @include no-wrap;
+
+  color: $primary;
 }
 </style>
