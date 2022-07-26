@@ -6,6 +6,7 @@ import AutoImport from 'unplugin-auto-import/vite';
 import ViteComponents from 'unplugin-vue-components/vite';
 import { VantResolver } from 'unplugin-vue-components/resolvers';
 import { createStyleImportPlugin, VantResolve } from 'vite-plugin-style-import';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -20,7 +21,9 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
-    // 自动引入vue和vue-router的包
+    /**
+     * 自动引入vue和vue-router的包
+     */
     AutoImport({
       include: [
         /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
@@ -31,7 +34,9 @@ export default defineConfig({
       resolvers: [VantResolver()],
       imports: ['vue', 'vue-router', 'pinia'],
     }),
-    // 自动引入vant的包
+    /**
+     * 自动引入vant的包
+     */
     ViteComponents({
       // dirs: ['src/components'], // 自定义的组件，默认就是'src/components'
       dts: 'src/types/components.d.ts', // 默认true表示生成声明文件（会生成后存在根目录），如果设置字符串表示存放路径
@@ -40,7 +45,9 @@ export default defineConfig({
       resolvers: [VantResolver()],
       // directoryAsNamespace: false, // 允许子目录作为组件的命名空间前缀
     }),
-    // vant toast等函数api调用，自动引入css
+    /**
+     * vant toast等函数api调用，自动引入css
+     */
     createStyleImportPlugin({
       resolves: [VantResolve()],
       libs: [
@@ -52,6 +59,17 @@ export default defineConfig({
           },
         },
       ],
+    }),
+    /**
+     * svg图标管理
+     */
+    createSvgIconsPlugin({
+      iconDirs: [
+        fileURLToPath(
+          new URL('./src/components/baseCom/svg-icon/icon', import.meta.url), // 存放icon图标的目录
+        ),
+      ],
+      symbolId: 'icon-[dir]-[name]',
     }),
   ],
 });

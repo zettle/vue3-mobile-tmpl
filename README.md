@@ -459,18 +459,29 @@ export default {
 3. 新建`/src/components/svg-icon/icon/*`文件夹，里面存放我们需要的 svg 图标
 
 4. 新建`/src/components/svg-icon/svg-icon.vue`，核心代码如下:
-
 ```ts
 import 'virtual:svg-icons-register'; // 触发所有svg图标的导入
-
 const symbolId = computed(() => `#icon-${props.name}`); // 单词前面的icon要和vite.cofig.ts里面生成图标的名字一直
 ```
+当需要使用的时候，直接使用下面代码就可以展示并且通过fontSize和color控制颜色和大小
+```vue
+<template>
+  <svg-icon name="home-fill" class="icon-home"></svg-icon>
+</template>
+<style lang="scss" scoped>
+.icon-home {
+  color: red;
+  font-size: 20px;
+}
+</style>
+```
 
-有时候，我们下载了一个 svg，通过 color 控制颜色没有起效果，那么就去这个 svg 的代码看下，把所有`fill`属性都删除
 
-![](./doc/fill.png)
+> 有时候，我们下载了一个 svg，通过 color 控制颜色没有起效果，那么就去这个 svg 的代码看下，把所有`fill`属性都删除
 
-> 因为 vant 是 375px 标准，如果是 webpack 打包已经找到解决方式，但 vite 还没找到，待研究
+
+
+
 
 ## 9、全局 scss 变量和 mixins
 
