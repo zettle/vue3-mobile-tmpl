@@ -684,10 +684,9 @@ html,
 ```ts
 {
   path: '/:pathMatch(.*)', // 配置404
-  redirect: '/error/404' // 不推荐redirect，会url重定向，但
+  redirect: '/error/404' // 不推荐redirect，会url重定向
 }
 ```
-
 但有点不好的，就是 url 会发生重定向，我们往往希望在 url 保留着那个 404 的地址，只是界面展示 not found 界面，所以需要改为下面的写法
 
 ```ts
@@ -702,36 +701,3 @@ html,
 - [vant](https://vant-contrib.gitee.io/vant/v3/#/zh-CN)
 - [pinia](https://pinia.esm.dev/introduction.html)
 - [vueRouter 滚动行为](https://next.router.vuejs.org/zh/guide/advanced/scroll-behavior.html)
-
-## 以后可能会用到的
-
-### 1、单例模式
-
-```ts
-class Person {
-  private static instance: Person;
-  // constructor修饰为private，就能限制外面通过new出实例
-  private constructor(public cname: string) {}
-
-  // 需要static这样外面才能在不实例化的情况下调用
-  static getInstance(cname: string) {
-    if (!this.instance) {
-      this.instance = new Person(cname);
-    }
-    return this.instance;
-  }
-}
-
-const p1 = Person.getInstance('xiaoming');
-const p2 = Person.getInstance('xiaohong');
-console.log(p1 === p2);
-console.log(p1.cname, p2.cname); // 都是xiaoming，因为不会再实例化第2次，也就是xiaohong不会生效
-```
-
-## 遗留问题
-
-### 1、api 的自动导入导出方案
-
-在 `/src/http/api/*` 里面定义了很多接口，然后在`/src/http/index.ts`做统一导入导出
-
-本来想着用`require.context()`做自动导入，发现对于`export interface xxx`的 ts 声明，无法导入和导出
